@@ -1,7 +1,16 @@
-async function pay() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const total = cart.reduce((a, b) => a + b.price * b.qty, 0);
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let total = 0;
 
+const summary = document.getElementById("summary");
+
+cart.forEach(i => {
+  summary.innerHTML += `<p>${i.name} x${i.qty}</p>`;
+  total += i.price * i.qty;
+});
+
+document.getElementById("total").innerText = "Total ₹" + total;
+
+async function pay() {
   const res = await fetch("/api/create-order", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
@@ -29,7 +38,7 @@ async function pay() {
         })
       });
 
-      alert("Order placed!");
+      alert("Order placed successfully!");
       localStorage.removeItem("cart");
       window.location.href = "/";
     }

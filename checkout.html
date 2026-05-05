@@ -1,8 +1,19 @@
-<input id="name" placeholder="Name">
-<input id="phone" placeholder="Phone">
-<textarea id="address"></textarea>
+<div class="header">
+  <div class="logo">BOTANORIA</div>
+</div>
 
-<button onclick="pay()">Pay Now</button>
+<div class="container">
+  <h2>Checkout</h2>
+
+  <input id="name" placeholder="Full Name">
+  <input id="phone" placeholder="Phone Number">
+  <textarea id="address" placeholder="Address"></textarea>
+
+  <div id="summary"></div>
+  <h3 id="total"></h3>
+
+  <button class="btn" onclick="pay()">Pay Now</button>
+</div>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script src="checkout.js"></script>

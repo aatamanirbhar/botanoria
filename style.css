@@ -15,13 +15,15 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 16px 24px;
+  padding: 16px 20px;
   background: #efe7dc;
+  position: sticky;
+  top: 0;
 }
 
 .logo {
   font-weight: bold;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
 }
 
 .container {
@@ -36,9 +38,84 @@ body {
 }
 
 .btn {
+  background: #111;
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 10px;
+  transition: 0.2s;
+   color:white
+}
+
+.btn:hover {
+  background: #333;
+}
+
+#products {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+
+.card {
+  background: white;
+  padding: 12px;
+  border-radius: 14px;
+}
+.card img {
+  border-radius: 10px;
+}
+
+.card h3 {
+  font-size: 16px;
+  margin: 8px 0 4px;
+}
+
+.card p {
+  font-size: 13px;
+  color: gray;
+}
+
+.cart-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  background: white;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.cart-item img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.cart-info h4 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.qty button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: #eee;
+  border-radius: 6px;
+}
+
+input, textarea {
   width: 100%;
   padding: 12px;
-  background: black;
-  color: white;
+  margin-bottom: 10px;
   border-radius: 8px;
+  border: 1px solid #ddd;
 }
