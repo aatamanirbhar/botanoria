@@ -1,121 +1,70 @@
-:root {
-  --bg: #f5efe6;
-  --card: #ffffff;
-  --accent: #6b7b5c;
-  --text: #2c2c2c;
-}
-
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  font-family: system-ui;
+  background: #f5efe6;
 }
 
+/* FIX WIDTH ISSUE */
+.app {
+  max-width: 420px;
+  margin: auto;
+  background: #f5efe6;
+  min-height: 100vh;
+}
+
+/* HEADER */
 .header {
+  padding: 14px;
+  background: #efe7dc;
   display: flex;
   justify-content: space-between;
-  padding: 16px 20px;
-  background: #efe7dc;
-  position: sticky;
-  top: 0;
 }
 
-.logo {
-  font-weight: bold;
-  letter-spacing: 3px;
-}
-
+/* CONTENT */
 .container {
-  padding: 20px;
-}
-
-.card {
-  background: var(--card);
-  padding: 16px;
-  border-radius: 14px;
-  margin-bottom: 20px;
-}
-
-.btn {
-  background: #111;
-  border-radius: 10px;
   padding: 12px;
-  margin-top: 10px;
-  transition: 0.2s;
-   color:white
 }
 
-.btn:hover {
-  background: #333;
-}
-
+/* GRID FIX */
 #products {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 10px;
 }
 
-
+/* CARD */
 .card {
   background: white;
-  padding: 12px;
-  border-radius: 14px;
-}
-.card img {
-  border-radius: 10px;
-}
-
-.card h3 {
-  font-size: 16px;
-  margin: 8px 0 4px;
-}
-
-.card p {
-  font-size: 13px;
-  color: gray;
-}
-
-.cart-item {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
-  background: white;
-  padding: 10px;
   border-radius: 12px;
+  padding: 8px;
 }
 
-.cart-item img {
-  width: 70px;
-  height: 70px;
+/* IMAGE FIX */
+.card img {
+  width: 100%;
+  height: 140px;
   object-fit: cover;
   border-radius: 10px;
 }
 
-.cart-info h4 {
-  margin: 0;
-  font-size: 14px;
-}
-
-.qty {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* TEXT */
+.card h3 {
+  font-size: 13px;
   margin-top: 6px;
 }
 
-.qty button {
-  width: 28px;
-  height: 28px;
-  border: none;
-  background: #eee;
-  border-radius: 6px;
+.card p {
+  font-size: 11px;
+  color: #666;
 }
 
-input, textarea {
+/* BUTTON */
+.btn {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 10px;
+  margin-top: 8px;
+  padding: 10px;
+  border: 1px solid #111;
+  background: transparent;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  font-size: 12px;
 }
