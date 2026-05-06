@@ -162,6 +162,8 @@ function showCartPopup() {
     "drawer-total"
   ).innerText = total;
 
+pushOverlayState();
+
   drawer.classList.remove("hidden");
 }
 
@@ -328,7 +330,7 @@ async function openVariantModal(productId){
       .single();
 
   currentProduct = product;
-
+pushOverlayState();
   document
     .getElementById("variant-modal")
     .classList
@@ -406,6 +408,8 @@ function closeVariantModal(){
 /* INITIAL LOAD */
 loadProducts();
 
+
+
 /* GLOBAL FUNCTIONS */
 window.addToCart = addToCart;
 window.addVariantToCart = addVariantToCart;
@@ -415,3 +419,59 @@ window.increaseQty = increaseQty;
 window.decreaseQty = decreaseQty;
 window.openVariantModal = openVariantModal;
 window.closeVariantModal = closeVariantModal;
+
+/* BACK BUTTON SUPPORT */
+
+function pushOverlayState(){
+
+  history.pushState(
+    {
+      overlay:true
+    },
+    ""
+  );
+}
+
+window.addEventListener(
+  "popstate",
+  function(){
+
+    const variantModal =
+      document.getElementById(
+        "variant-modal"
+      );
+
+    const cartDrawer =
+      document.getElementById(
+        "cart-drawer"
+      );
+
+    /* CLOSE VARIANT MODAL */
+
+    if(
+      variantModal &&
+      !variantModal.classList.contains(
+        "hidden"
+      )
+    ){
+
+      closeVariantModal();
+
+      return;
+    }
+
+    /* CLOSE CART DRAWER */
+
+    if(
+      cartDrawer &&
+      !cartDrawer.classList.contains(
+        "hidden"
+      )
+    ){
+
+      closeDrawer();
+
+      return;
+    }
+  }
+);
