@@ -84,11 +84,23 @@
       type="number"
     >
 
-    <input
-      id="product-image"
-      class="input"
-      placeholder="Image URL"
-    >
+   <input
+  type="file"
+  id="product-image-file"
+  class="input"
+  accept="image/*"
+>
+
+<img
+  id="product-image-preview"
+  class="admin-preview hidden"
+>
+
+<input
+  id="product-image"
+  class="input hidden"
+  placeholder="Image URL"
+/>
 
     <label class="admin-checkbox">
 

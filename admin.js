@@ -189,6 +189,14 @@ async function editProduct(id){
   ).value = data.image;
 
   document.getElementById(
+  "product-image-preview"
+).src = data.image;
+
+document.getElementById(
+  "product-image-preview"
+).classList.remove("hidden");
+
+  document.getElementById(
   "product-has-variants"
 ).checked =
   data.has_variants;
@@ -198,6 +206,18 @@ async function editProduct(id){
 
 
 function clearProductForm(){
+
+  document.getElementById(
+  "product-image-file"
+).value = "";
+
+document.getElementById(
+  "product-image-preview"
+).src = "";
+
+document.getElementById(
+  "product-image-preview"
+).classList.add("hidden");
 
   document.getElementById(
     "product-name"
@@ -220,8 +240,65 @@ function clearProductForm(){
 ).checked = false;
 }
 
+
+async function uploadProductImage(){
+
+  const file =
+    document.getElementById(
+      "product-image-file"
+    ).files[0];
+
+  if(!file) return;
+
+  const fileName =
+    `${Date.now()}-${file.name}`;
+
+  const { error } =
+    await supabaseClient
+      .storage
+      .from("product-images")
+      .upload(fileName, file);
+
+  if(error){
+    console.log(error);
+    return;
+  }
+
+  const {
+    data: { publicUrl }
+  } =
+    supabaseClient
+      .storage
+      .from("product-images")
+      .getPublicUrl(fileName);
+
+  document.getElementById(
+    "product-image"
+  ).value = publicUrl;
+
+  const preview =
+    document.getElementById(
+      "product-image-preview"
+    );
+
+  preview.src = publicUrl;
+
+  preview.classList.remove("hidden");
+}
+
+document
+  .getElementById(
+    "product-image-file"
+  )
+  .addEventListener(
+    "change",
+    uploadProductImage
+  );
+
 let editingProductId = null;
 let currentVariantProductId = null;
+
+
 
 async function deleteProduct(id){
 
