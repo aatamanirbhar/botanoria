@@ -1,53 +1,100 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function renderCart() {
-  const container = document.getElementById("cart");
-  const totalEl = document.getElementById("total");
-  const shippingEl = document.getElementById("shipping");
+const el = document.getElementById("cart-items");
 
-  container.innerHTML = "";
+function renderCart() {
+
+  el.innerHTML = "";
+
   let total = 0;
 
-  cart.forEach((item, index) => {
+  cart.forEach(item => {
+
     total += item.price * item.qty;
 
-    container.innerHTML += `
-      <div class="cart-item">
-        <img src="${item.image}">
-        
+    el.innerHTML += `
+
+      <div class="cart-card">
+
+        <img src="${item.image}" class="cart-img">
+
         <div class="cart-info">
-          <h4>${item.name}</h4>
+
+          <h3>${item.name}</h3>
+
           <p>₹${item.price}</p>
 
-          <div class="qty">
-            <button onclick="changeQty(${index}, -1)">−</button>
-            <span>${item.qty}</span>
-            <button onclick="changeQty(${index}, 1)">+</button>
+          <div class="qty-row">
+
+      <button
+  class="qty-btn"
+  onclick="decreaseQty('${item.id}')"
+>
+  -
+</button>
+
+<span>${item.qty}</span>
+
+<button
+  class="qty-btn"
+  onclick="increaseQty('${item.id}')"
+>
+  +
+</button>
+
           </div>
+
         </div>
+
       </div>
+
     `;
   });
 
-  totalEl.innerText = "Total ₹" + total;
+  document.getElementById("total").innerText = total;
+}
 
-  if (total < 600) {
-    shippingEl.innerText = `Add ₹${600 - total} more for FREE shipping`;
-  } else {
-    shippingEl.innerText = "Free shipping unlocked 🎉";
+function increaseQty(id) {
+
+  cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let item = cart.find(i => String(i.id) === String(id));
+
+  if (item) {
+    item.qty += 1;
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-function changeQty(index, change) {
-  cart[index].qty += change;
-
-  if (cart[index].qty <= 0) {
-    cart.splice(index, 1);
-  }
 
   renderCart();
 }
 
+function decreaseQty(id) {
+
+  cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let item = cart.find(i => String(i.id) === String(id));
+
+  if (!item) return;
+
+  item.qty -= 1;
+
+  if (item.qty <= 0) {
+    cart = cart.filter(i => String(i.id) !== String(id));
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  renderCart();
+}
+
+function goToCheckout() {
+  window.location.href = "checkout.html";
+}
+
 renderCart();
+
+
+window.increaseQty = increaseQty;
+window.decreaseQty = decreaseQty;
+window.goToCheckout = goToCheckout;

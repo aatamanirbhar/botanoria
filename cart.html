@@ -1,18 +1,43 @@
-<div class="header">
-  <div class="logo">BOTANORIA</div>
-</div>
+<!DOCTYPE html>
+<html>
 
-<div class="container">
-  <h2>Your Cart</h2>
+<head>
+  <title>Cart</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-  <div id="cart"></div>
+<body>
 
-  <p id="shipping"></p>
-  <h3 id="total"></h3>
+<div class="app">
 
-  <a href="checkout.html">
-    <button class="btn">Proceed to Checkout</button>
-  </a>
+  <div class="header">
+    <div class="logo">BOTANORIA</div>
+  </div>
+
+  <div class="container">
+
+    <h2>Your Cart</h2>
+
+    <div id="cart-items"></div>
+
+    <div class="cart-total-box">
+
+      <h3>
+        Total: ₹<span id="total">0</span>
+      </h3>
+
+      <button class="checkout-btn" onclick="goToCheckout()">
+        Checkout
+      </button>
+
+    </div>
+
+  </div>
+
 </div>
 
 <script src="cart.js"></script>
+
+</body>
+</html>

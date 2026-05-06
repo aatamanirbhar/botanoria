@@ -7,6 +7,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
+<div id="cart-drawer" class="drawer hidden">
+  <div class="drawer-content">
+
+    <div class="drawer-top">
+      <h3>Your Cart</h3>
+      <span onclick="closeDrawer()">✕</span>
+    </div>
+
+    <div id="drawer-items"></div>
+
+    <div class="drawer-footer">
+      <h3>Total ₹<span id="drawer-total">0</span></h3>
+
+      <button class="checkout-btn" onclick="goToCart()">
+        View Cart
+      </button>
+    </div>
+
+  </div>
+</div>
+
 <body>
 <div class="app">
   <!-- sab content yahan daal -->

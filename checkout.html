@@ -1,19 +1,43 @@
-<div class="header">
-  <div class="logo">BOTANORIA</div>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Checkout</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="header">
+    <div class="logo">BOTANORIA</div>
+  </div>
+
+  <div class="container checkout-container">
+
+    <h2>Checkout</h2>
+
+    <input placeholder="Full Name" class="input">
+
+    <input placeholder="Phone Number" class="input">
+
+    <textarea placeholder="Address" class="input"></textarea>
+
+    <div class="checkout-total">
+      Total: ₹<span id="checkout-total">0</span>
+    </div>
+
+    <button class="pay-btn">
+      Pay Now
+    </button>
+
+  </div>
+
 </div>
 
-<div class="container">
-  <h2>Checkout</h2>
-
-  <input id="name" placeholder="Full Name">
-  <input id="phone" placeholder="Phone Number">
-  <textarea id="address" placeholder="Address"></textarea>
-
-  <div id="summary"></div>
-  <h3 id="total"></h3>
-
-  <button class="btn" onclick="pay()">Pay Now</button>
-</div>
-
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script src="checkout.js"></script>
+
+</body>
+</html>
