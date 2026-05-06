@@ -47,6 +47,57 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script src="supabase.js"></script>
+
+
+<div id="variant-modal" class="variant-modal hidden">
+
+  <div class="variant-box">
+
+    <button
+      class="variant-close"
+      onclick="closeVariantModal()"
+    >
+      ×
+    </button>
+
+    <img
+      id="variant-image"
+      class="variant-image"
+      src=""
+    >
+
+    <h2
+      id="variant-title"
+      class="variant-title"
+    ></h2>
+
+    <p
+      id="variant-price"
+      class="variant-price"
+    ></p>
+
+    <div
+      id="variant-options"
+      class="variant-options"
+    ></div>
+
+    <button
+      class="variant-add-btn"
+      onclick="addSelectedVariantToCart()"
+    >
+      Add To Cart
+    </button>
+
+    <button
+      class="variant-cart-btn"
+      onclick="goToCart()"
+    >
+      Go To Cart
+    </button>
+
+  </div>
+
+</div>
 <script src="script.js"></script>
 </div>
 </body>

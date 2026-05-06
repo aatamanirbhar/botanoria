@@ -166,9 +166,12 @@ async function loadProducts() {
         ${
           p.has_variants
           ? `
-            <button class="btn variant-btn">
-              Choose options
-            </button>
+            <button
+  class="btn variant-btn"
+  onclick="openVariantModal('${p.id}')"
+>
+  Choose Options
+</button>
           `
           : `
             <button
@@ -186,7 +189,98 @@ async function loadProducts() {
   });
 }
 
+async function getVariants(productId) {
+
+  const { data, error } = await supabaseClient
+    .from("product_variants")
+    .select("*")
+    .eq("product_id", productId)
+    .eq("active", true);
+
+  if (error) {
+    console.log(error);
+    return [];
+  }
+
+  return data;
+}
+
 loadProducts();
+
+let selectedVariant = null;
+
+async function openVariantModal(productId){
+
+  const variants = await getVariants(productId);
+
+  if(!variants.length) return;
+
+  const { data: product } = await supabaseClient
+    .from("products")
+    .select("*")
+    .eq("id", productId)
+    .single();
+
+  document
+    .getElementById("variant-modal")
+    .classList
+    .remove("hidden");
+
+  document.getElementById("variant-title").innerText =
+    product.name;
+
+  document.getElementById("variant-image").src =
+    product.image;
+
+  selectedVariant = variants[0];
+
+  document.getElementById("variant-price").innerText =
+    `₹${selectedVariant.price}`;
+
+  const options =
+    document.getElementById("variant-options");
+
+  options.innerHTML = "";
+
+  variants.forEach((variant, index) => {
+
+    const btn = document.createElement("button");
+
+    btn.className = "variant-option";
+
+    if(index === 0){
+      btn.classList.add("active");
+    }
+
+    btn.innerText = variant.name;
+
+    btn.onclick = () => {
+
+      selectedVariant = variant;
+
+      document.getElementById("variant-price").innerText =
+        `₹${variant.price}`;
+
+      document
+        .querySelectorAll(".variant-option")
+        .forEach(el =>
+          el.classList.remove("active")
+        );
+
+      btn.classList.add("active");
+    };
+
+    options.appendChild(btn);
+  });
+}
+
+function closeVariantModal(){
+
+  document
+    .getElementById("variant-modal")
+    .classList
+    .add("hidden");
+}
 
 
 /* GLOBAL */
@@ -195,3 +289,7 @@ window.closeDrawer = closeDrawer;
 window.goToCart = goToCart;
 window.increaseQty = increaseQty;
 window.decreaseQty = decreaseQty;
+window.openVariantModal = openVariantModal;
+window.openVariantModal = openVariantModal;
+
+window.closeVariantModal = closeVariantModal;
