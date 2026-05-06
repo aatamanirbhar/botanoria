@@ -1,15 +1,180 @@
-<h2>BOTANORIA Admin</h2>
+<!DOCTYPE html>
+<html>
 
-<input id="name" placeholder="Name">
-<input id="price" placeholder="Price">
-<input id="image" placeholder="Image URL">
-<textarea id="description"></textarea>
+<head>
+  <title>BOTANORIA Admin</title>
 
-<button onclick="addProduct()">Add</button>
+  <link rel="stylesheet" href="style.css">
 
-<div id="products"></div>
-<div id="orders"></div>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="header">
+
+    <div class="logo">
+      BOTANORIA ADMIN
+    </div>
+
+  </div>
+
+  <div class="container">
+
+    <div class="admin-top">
+
+      <h1>Products</h1>
+
+      <button
+        class="admin-add-btn"
+        onclick="openAddProductModal()"
+      >
+        + Add Product
+      </button>
+
+    </div>
+
+    <div id="admin-products"></div>
+
+  </div>
+
+</div>
+
+<!-- ADD PRODUCT MODAL -->
+
+<div
+  id="product-modal"
+  class="variant-modal hidden"
+>
+
+  <div class="variant-box">
+
+    <span
+      class="variant-close"
+      onclick="closeProductModal()"
+    >
+      ×
+    </span>
+
+    <h2>Add Product</h2>
+
+    <input
+      id="product-name"
+      class="input"
+      placeholder="Product Name"
+    >
+
+    <textarea
+      id="product-description"
+      class="input"
+      placeholder="Description"
+    ></textarea>
+
+    <input
+      id="product-price"
+      class="input"
+      placeholder="Price"
+      type="number"
+    >
+
+    <input
+      id="product-image"
+      class="input"
+      placeholder="Image URL"
+    >
+
+    <label class="admin-checkbox">
+
+  <input
+    type="checkbox"
+    id="product-has-variants"
+  >
+
+  This product has variants
+
+</label>
+
+    <button
+      class="variant-add-btn"
+      onclick="addProduct()"
+    >
+      Save Product
+    </button>
+
+  </div>
+
+</div>
+
+<!-- VARIANT MANAGER -->
+
+<div
+  id="variant-manager-modal"
+  class="variant-modal hidden"
+>
+
+  <div class="variant-box">
+
+    <span
+      class="variant-close"
+      onclick="closeVariantManager()"
+    >
+      ×
+    </span>
+
+    <h2 id="variant-manager-title">
+      Variants
+    </h2>
+
+    <div id="admin-variants"></div>
+
+    <hr style="margin:20px 0;">
+
+    <input
+      id="variant-name"
+      class="input"
+      placeholder="Variant Name"
+    >
+
+    <input
+      id="variant-price"
+      class="input"
+      type="number"
+      placeholder="Variant Price"
+    >
+
+    <input
+      id="variant-stock"
+      class="input"
+      type="number"
+      placeholder="Stock"
+    >
+
+    <input
+      id="variant-image"
+      class="input"
+      placeholder="Image URL"
+    >
+
+    <button
+      class="variant-add-btn"
+      onclick="addVariant()"
+    >
+      Add Variant
+    </button>
+
+  </div>
+
+</div>
+
 <script src="supabase.js"></script>
 <script src="admin.js"></script>
+
+</body>
+</html>

@@ -703,3 +703,112 @@ textarea.input {
   font-size:18px;
   font-weight:700;
 }
+
+
+
+
+/* ADMIN */
+
+.admin-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:24px;
+}
+
+.admin-add-btn{
+  border:none;
+  background:#111;
+  color:white;
+  padding:14px 18px;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+.admin-card{
+  background:white;
+  border-radius:20px;
+  padding:16px;
+  display:flex;
+  gap:18px;
+  margin-bottom:18px;
+}
+
+.admin-img{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border-radius:14px;
+}
+
+.admin-info{
+  flex:1;
+}
+
+.admin-info h3{
+  margin:0;
+}
+
+.admin-actions{
+  margin-top:14px;
+}
+
+.admin-delete-btn{
+  border:none;
+  background:#c62828;
+  color:white;
+  padding:10px 16px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+@media(max-width:768px){
+
+  .admin-card{
+    flex-direction:column;
+  }
+
+  .admin-img{
+    width:100%;
+    height:240px;
+  }
+
+  .admin-top{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+  }
+}
+
+
+
+
+.admin-edit-btn{
+  border:none;
+  background:#111;
+  color:white;
+  padding:10px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  margin-right:10px;
+}
+
+.admin-variant-btn{
+  border:none;
+  background:#444;
+  color:white;
+  padding:10px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  margin-right:10px;
+}
+
+.admin-variant-card{
+  background:white;
+  padding:14px;
+  border-radius:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}

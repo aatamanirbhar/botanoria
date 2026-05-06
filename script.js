@@ -404,3 +404,5 @@ window.openVariantModal = openVariantModal;
 window.closeVariantModal = closeVariantModal;
 window.addSelectedVariantToCart =
   addSelectedVariantToCart;
+
+  
