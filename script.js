@@ -1,20 +1,29 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+let selectedVariant = null;
+let currentProduct = null;
+
 /* SAVE CART */
 function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-/* ADD TO CART */
-function addToCart(p) {
+/* ADD NORMAL PRODUCT TO CART */
+function addToCart(product) {
 
-  let existing = cart.find(i => String(i.id) === String(p.id));
+  let existing = cart.find(item =>
+    String(item.id) === String(product.id)
+  );
 
   if (existing) {
+
     existing.qty += 1;
+
   } else {
-    p.qty = 1;
-    cart.push(p);
+
+    product.qty = 1;
+
+    cart.push(product);
   }
 
   saveCart();
@@ -22,15 +31,16 @@ function addToCart(p) {
   showCartPopup();
 }
 
-
-/* SHOW CART POPUP */
+/* SHOW CART DRAWER */
 function showCartPopup() {
 
   cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  const drawer = document.getElementById("cart-drawer");
+  const drawer =
+    document.getElementById("cart-drawer");
 
-  const items = document.getElementById("drawer-items");
+  const items =
+    document.getElementById("drawer-items");
 
   items.innerHTML = "";
 
@@ -44,23 +54,42 @@ function showCartPopup() {
 
       <div class="drawer-item">
 
-        <img src="${item.image}" class="drawer-img">
+        <img
+          src="${item.image}"
+          class="drawer-img"
+        >
 
         <div class="drawer-info">
 
           <h4>${item.name}</h4>
 
+          ${
+            item.variantName
+              ? `<p>${item.variantName}</p>`
+              : ""
+          }
+
           <p>₹${item.price}</p>
 
           <div class="qty-row">
 
-            <button class="qty-btn" onclick="decreaseQty('${item.id}')">
+            <button
+              class="qty-btn"
+              onclick="decreaseQty('${
+                item.variantId || item.id
+              }')"
+            >
               -
             </button>
 
             <span>${item.qty}</span>
 
-            <button class="qty-btn" onclick="increaseQty('${item.id}')">
+            <button
+              class="qty-btn"
+              onclick="increaseQty('${
+                item.variantId || item.id
+              }')"
+            >
               +
             </button>
 
@@ -73,20 +102,21 @@ function showCartPopup() {
     `;
   });
 
-  document.getElementById("drawer-total").innerText = total;
+  document.getElementById(
+    "drawer-total"
+  ).innerText = total;
 
   drawer.classList.remove("hidden");
 }
-
 
 /* CLOSE DRAWER */
 function closeDrawer() {
 
   document
     .getElementById("cart-drawer")
-    .classList.add("hidden");
+    .classList
+    .add("hidden");
 }
-
 
 /* GO TO CART */
 function goToCart() {
@@ -94,15 +124,17 @@ function goToCart() {
   window.location.href = "cart.html";
 }
 
-
 /* INCREASE QTY */
 function increaseQty(id) {
 
   cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  let item = cart.find(i => String(i.id) === String(id));
+  let item = cart.find(item =>
+    String(item.variantId || item.id)
+      === String(id)
+  );
 
-  if (item) {
+  if(item){
     item.qty += 1;
   }
 
@@ -111,20 +143,26 @@ function increaseQty(id) {
   showCartPopup();
 }
 
-
 /* DECREASE QTY */
 function decreaseQty(id) {
 
   cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  let item = cart.find(i => String(i.id) === String(id));
+  let item = cart.find(item =>
+    String(item.variantId || item.id)
+      === String(id)
+  );
 
-  if (!item) return;
+  if(!item) return;
 
   item.qty -= 1;
 
-  if (item.qty <= 0) {
-    cart = cart.filter(i => String(i.id) !== String(id));
+  if(item.qty <= 0){
+
+    cart = cart.filter(item =>
+      String(item.variantId || item.id)
+        !== String(id)
+    );
   }
 
   saveCart();
@@ -132,54 +170,63 @@ function decreaseQty(id) {
   showCartPopup();
 }
 
-
 /* LOAD PRODUCTS */
 async function loadProducts() {
 
-  const { data, error } = await supabaseClient
-    .from("products")
-    .select("*");
+  const { data, error } =
+    await supabaseClient
+      .from("products")
+      .select("*");
 
-  if (error) {
+  if(error){
     console.log(error);
     return;
   }
 
-  const el = document.getElementById("products");
+  const productsEl =
+    document.getElementById("products");
 
-  el.innerHTML = "";
+  productsEl.innerHTML = "";
 
-  data.forEach(p => {
+  data.forEach(product => {
 
-    el.innerHTML += `
+    productsEl.innerHTML += `
 
       <div class="card">
 
-        <img src="${p.image}">
+        <img src="${product.image}">
 
-        <h3>${p.name}</h3>
+        <h3>${product.name}</h3>
 
-        <p>${p.description}</p>
+        <p>${product.description}</p>
 
-        <p class="price">₹${p.price}</p>
+        <p class="price">
+          ₹${product.price}
+        </p>
 
         ${
-          p.has_variants
+          product.has_variants
+
           ? `
-            <button
-  class="btn variant-btn"
-  onclick="openVariantModal('${p.id}')"
->
-  Choose Options
-</button>
-          `
-          : `
+
             <button
               class="btn"
-              onclick='addToCart(${JSON.stringify(p)})'
+              onclick="openVariantModal('${product.id}')"
             >
-              Add to Cart
+              Choose Options
             </button>
+
+          `
+
+          : `
+
+            <button
+              class="btn"
+              onclick='addToCart(${JSON.stringify(product)})'
+            >
+              Add To Cart
+            </button>
+
           `
         }
 
@@ -189,64 +236,77 @@ async function loadProducts() {
   });
 }
 
-async function getVariants(productId) {
+/* GET VARIANTS */
+async function getVariants(productId){
 
-  const { data, error } = await supabaseClient
-    .from("product_variants")
-    .select("*")
-    .eq("product_id", productId)
-    .eq("active", true);
+  const { data, error } =
+    await supabaseClient
+      .from("product_variants")
+      .select("*")
+      .eq("product_id", productId)
+      .eq("active", true);
 
-  if (error) {
+  if(error){
+
     console.log(error);
+
     return [];
   }
 
   return data;
 }
 
-loadProducts();
-
-let selectedVariant = null;
-
+/* OPEN VARIANT MODAL */
 async function openVariantModal(productId){
 
-  const variants = await getVariants(productId);
+  const variants =
+    await getVariants(productId);
 
   if(!variants.length) return;
 
-  const { data: product } = await supabaseClient
-    .from("products")
-    .select("*")
-    .eq("id", productId)
-    .single();
+  const { data: product } =
+    await supabaseClient
+      .from("products")
+      .select("*")
+      .eq("id", productId)
+      .single();
+
+  currentProduct = product;
 
   document
     .getElementById("variant-modal")
     .classList
     .remove("hidden");
 
-  document.getElementById("variant-title").innerText =
-    product.name;
+  document.getElementById(
+    "variant-title"
+  ).innerText = product.name;
 
-  document.getElementById("variant-image").src =
-    product.image;
+  document.getElementById(
+    "variant-image"
+  ).src = product.image;
 
   selectedVariant = variants[0];
 
-  document.getElementById("variant-price").innerText =
+  document.getElementById(
+    "variant-price"
+  ).innerText =
     `₹${selectedVariant.price}`;
 
   const options =
-    document.getElementById("variant-options");
+    document.getElementById(
+      "variant-options"
+    );
 
   options.innerHTML = "";
 
   variants.forEach((variant, index) => {
 
-    const btn = document.createElement("button");
+    const btn =
+      document.createElement("button");
 
-    btn.className = "variant-option";
+    btn.className =
+      "variant-option";
 
     if(index === 0){
       btn.classList.add("active");
@@ -258,14 +318,18 @@ async function openVariantModal(productId){
 
       selectedVariant = variant;
 
-      document.getElementById("variant-price").innerText =
+      document.getElementById(
+        "variant-price"
+      ).innerText =
         `₹${variant.price}`;
 
       document
-        .querySelectorAll(".variant-option")
-        .forEach(el =>
-          el.classList.remove("active")
-        );
+        .querySelectorAll(
+          ".variant-option"
+        )
+        .forEach(el => {
+          el.classList.remove("active");
+        });
 
       btn.classList.add("active");
     };
@@ -274,6 +338,7 @@ async function openVariantModal(productId){
   });
 }
 
+/* CLOSE VARIANT MODAL */
 function closeVariantModal(){
 
   document
@@ -282,14 +347,60 @@ function closeVariantModal(){
     .add("hidden");
 }
 
+/* ADD SELECTED VARIANT TO CART */
+function addSelectedVariantToCart(){
 
-/* GLOBAL */
+  if(!selectedVariant) return;
+
+  cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const existing = cart.find(item =>
+    item.variantId === selectedVariant.id
+  );
+
+  if(existing){
+
+    existing.qty += 1;
+
+  } else {
+
+    cart.push({
+
+      id: currentProduct.id,
+
+      variantId: selectedVariant.id,
+
+      name: currentProduct.name,
+
+      variantName: selectedVariant.name,
+
+      price: selectedVariant.price,
+
+      image:
+        selectedVariant.image
+        || currentProduct.image,
+
+      qty: 1
+    });
+  }
+
+  saveCart();
+
+  closeVariantModal();
+
+  showCartPopup();
+}
+
+/* INITIAL LOAD */
+loadProducts();
+
+/* GLOBAL FUNCTIONS */
 window.addToCart = addToCart;
 window.closeDrawer = closeDrawer;
 window.goToCart = goToCart;
 window.increaseQty = increaseQty;
 window.decreaseQty = decreaseQty;
 window.openVariantModal = openVariantModal;
-window.openVariantModal = openVariantModal;
-
 window.closeVariantModal = closeVariantModal;
+window.addSelectedVariantToCart =
+  addSelectedVariantToCart;
