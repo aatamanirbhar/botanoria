@@ -6,7 +6,10 @@
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
+<div class="shipping-strip">
+  FREE DELIVERY ABOVE ₹1000
+</div>
+<div class="shipping-strip coupon-strip"></div>
 <body>
 
 <div class="app">
@@ -27,9 +30,49 @@
 
 <div id="checkout-items"></div>
 
-    <div class="checkout-total">
-      Total: ₹<span id="checkout-total">0</span>
-    </div>
+<div class="coupon-box">
+
+  <input
+    id="coupon-input"
+    class="input"
+    placeholder="Enter Coupon Code"
+  >
+
+  <button
+    class="apply-coupon-btn"
+    onclick="applyCoupon()"
+  >
+    Apply
+  </button>
+
+</div>
+
+<p id="coupon-message"></p>
+
+    <div class="checkout-summary">
+
+  <div class="summary-row">
+    <span>Subtotal</span>
+    <span>
+      ₹<span id="checkout-subtotal">0</span>
+    </span>
+  </div>
+
+  <div class="summary-row">
+    <span>Shipping</span>
+    <span id="checkout-shipping">
+      ₹49
+    </span>
+  </div>
+
+  <div class="summary-row total-row">
+    <span>Total</span>
+    <span>
+      ₹<span id="checkout-total">0</span>
+    </span>
+  </div>
+
+
 
     <button class="pay-btn">
       Pay Now

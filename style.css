@@ -856,3 +856,219 @@ textarea.input {
   border-radius:18px;
   margin-top:14px;
 }
+
+/* CHECKOUT ITEMS */
+
+.checkout-item{
+  display:flex;
+  gap:14px;
+
+  background:white;
+
+  padding:14px;
+  border-radius:18px;
+
+  margin-bottom:16px;
+}
+
+.checkout-item-img{
+  width:90px;
+  height:90px;
+
+  object-fit:cover;
+
+  border-radius:12px;
+}
+
+.checkout-item-info{
+  flex:1;
+}
+
+.checkout-item-info h3{
+  margin:0;
+  font-size:18px;
+}
+
+.checkout-variant{
+  display:inline-block;
+
+  margin-top:8px;
+
+  padding:4px 10px;
+
+  background:#efe7dc;
+
+  border-radius:999px;
+
+  font-size:12px;
+  font-weight:600;
+}
+
+.checkout-item-price{
+  margin-top:10px;
+  font-size:18px;
+  font-weight:700;
+}
+
+.coupon-box{
+  display:flex;
+  gap:10px;
+  margin:20px 0;
+}
+
+.apply-coupon-btn{
+  border:none;
+  background:#111;
+  color:white;
+  padding:0 20px;
+  border-radius:12px;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+#coupon-message{
+  margin-top:-8px;
+  margin-bottom:20px;
+  font-weight:600;
+}
+
+.shipping-strip{
+
+  background:#111;
+  color:white;
+
+  text-align:center;
+
+  padding:10px;
+
+  font-size:13px;
+
+  letter-spacing:1px;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  position:relative;
+}
+
+.shipping-strip::after{
+
+  content:
+    "FREE DELIVERY ABOVE ₹1000 ✨";
+
+  position:absolute;
+
+  left:100%;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  animation:
+    marqueeMove 10s linear infinite,
+    shippingGlow 1.4s infinite;
+
+}
+
+@keyframes marqueeMove{
+
+  0%{
+    left:100%;
+  }
+
+  100%{
+    left:-100%;
+  }
+}
+
+@keyframes shippingGlow{
+
+  0%{
+    text-shadow:
+      0 0 0px white;
+  }
+
+  50%{
+    text-shadow:
+      0 0 10px white,
+      0 0 18px white;
+  }
+
+  100%{
+    text-shadow:
+      0 0 0px white;
+  }
+}
+
+.checkout-summary{
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  margin-top:20px;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:14px;
+}
+
+.total-row{
+  font-size:20px;
+  font-weight:700;
+}
+
+#coupon-message{
+  margin-top:10px;
+  margin-bottom:16px;
+  font-size:14px;
+  font-weight:600;
+}
+
+.apply-coupon-btn{
+  height:56px;
+}
+
+.coupon-success{
+
+  animation:
+    popBounce 0.7s ease;
+
+  color:#0f9d58;
+}
+
+@keyframes popBounce{
+
+  0%{
+    transform:scale(0.8);
+    opacity:0;
+  }
+
+  50%{
+    transform:scale(1.08);
+    opacity:1;
+  }
+
+  100%{
+    transform:scale(1);
+  }
+}
+
+.coupon-strip::after{
+
+  content:
+    "USE COUPON BOTAN10 AT CHECKOUT FOR 10% DISCOUNT ON ORDERS ABOVE ₹999 ✨";
+
+  position:absolute;
+
+  left:100%;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  animation:
+    marqueeMove 14s linear infinite,
+    shippingGlow 1.4s infinite;
+}

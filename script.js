@@ -31,6 +31,62 @@ function addToCart(product) {
   showCartPopup();
 }
 
+/* ADD VARIANT TO CART */
+function addVariantToCart(){
+
+  if(!selectedVariant) return;
+
+  let cart =
+    JSON.parse(
+      localStorage.getItem("cart")
+    ) || [];
+
+  const existingItem =
+    cart.find(item =>
+      item.variantId === selectedVariant.id
+    );
+
+  if(existingItem){
+
+    existingItem.qty += 1;
+
+  } else {
+
+    cart.push({
+
+      productId:
+        currentProduct.id,
+
+      variantId:
+        selectedVariant.id,
+
+      variantName:
+        selectedVariant.name,
+
+      name:
+        currentProduct.name,
+
+      price:
+        selectedVariant.price,
+
+      image:
+        selectedVariant.image ||
+        currentProduct.image,
+
+      qty:1
+    });
+  }
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+  );
+
+  closeVariantModal();
+
+  showCartPopup();
+}
+
 /* SHOW CART DRAWER */
 function showCartPopup() {
 
@@ -347,62 +403,15 @@ function closeVariantModal(){
     .add("hidden");
 }
 
-/* ADD SELECTED VARIANT TO CART */
-function addSelectedVariantToCart(){
-
-  if(!selectedVariant) return;
-
-  cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  const existing = cart.find(item =>
-    item.variantId === selectedVariant.id
-  );
-
-  if(existing){
-
-    existing.qty += 1;
-
-  } else {
-
-    cart.push({
-
-      id: currentProduct.id,
-
-      variantId: selectedVariant.id,
-
-      name: currentProduct.name,
-
-      variantName: selectedVariant.name,
-
-      price: selectedVariant.price,
-
-      image:
-        selectedVariant.image
-        || currentProduct.image,
-
-      qty: 1
-    });
-  }
-
-  saveCart();
-
-  closeVariantModal();
-
-  showCartPopup();
-}
-
 /* INITIAL LOAD */
 loadProducts();
 
 /* GLOBAL FUNCTIONS */
 window.addToCart = addToCart;
+window.addVariantToCart = addVariantToCart;
 window.closeDrawer = closeDrawer;
 window.goToCart = goToCart;
 window.increaseQty = increaseQty;
 window.decreaseQty = decreaseQty;
 window.openVariantModal = openVariantModal;
 window.closeVariantModal = closeVariantModal;
-window.addSelectedVariantToCart =
-  addSelectedVariantToCart;
-
-  
