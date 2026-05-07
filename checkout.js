@@ -308,9 +308,10 @@ async function startPayment(){
           response
         );
 
-        alert(
-          "Payment Successful ✨"
-        );
+       localStorage.removeItem("cart");
+
+window.location.href =
+  "success.html";
       }
     };
 
