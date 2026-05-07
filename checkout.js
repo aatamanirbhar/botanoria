@@ -301,18 +301,136 @@ async function startPayment(){
         color:"#111111"
       },
 
-      handler:function(response){
+   handler: async function(response){
 
-        console.log(
-          "Payment Success",
+  try{
+
+    const cart =
+      JSON.parse(
+        localStorage.getItem("cart")
+      ) || [];
+
+    const customerName =
+      document
+        .querySelectorAll(".input")[0]
+        .value;
+
+    const customerPhone =
+      document
+        .querySelectorAll(".input")[1]
+        .value;
+
+    const customerEmail =
+      document
+        .getElementById(
+          "customer-email"
+        )
+        .value;
+
+    const customerAddress =
+      document
+        .querySelectorAll(".input")[3]
+        .value;
+
+    /* SAVE ORDER */
+
+    const {
+      data:orderData,
+      error:orderError
+    } = await supabaseClient
+      .from("orders")
+      .insert([{
+
+        customer_name:
+          customerName,
+
+        phone:
+          customerPhone,
+
+        email:
+          customerEmail,
+
+        address:
+          customerAddress,
+
+        total:
+          finalTotal,
+
+        payment_id:
           response
-        );
+            .razorpay_payment_id
 
-       localStorage.removeItem("cart");
+      }])
+      .select()
+      .single();
 
-window.location.href =
-  "success.html";
-      }
+    if(orderError){
+
+      console.log(orderError);
+
+      alert(
+        "Order save failed"
+      );
+
+      return;
+    }
+
+    /* SAVE ITEMS */
+
+    const items =
+      cart.map(item => ({
+
+        order_id:
+          orderData.id,
+
+        product_id:
+          item.id,
+
+        product_name:
+          item.name,
+
+        image:
+          item.image,
+
+        qty:
+          item.qty,
+
+        price:
+          item.price
+
+      }));
+
+    const {
+      error:itemError
+    } = await supabaseClient
+      .from("order_items")
+      .insert(items);
+
+    if(itemError){
+
+      console.log(itemError);
+    }
+
+    /* CLEAR CART */
+
+    localStorage.removeItem(
+      "cart"
+    );
+
+    /* SUCCESS PAGE */
+
+    window.location.href =
+      "success.html";
+
+  } catch(error){
+
+    console.log(error);
+
+    alert(
+      "Something went wrong"
+    );
+  }
+}
     };
 
     const razorpay =
