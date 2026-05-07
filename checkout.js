@@ -411,6 +411,86 @@ async function startPayment(){
       console.log(itemError);
     }
 
+const orderMessage = `
+
+📦 NEW BOTANORIA ORDER
+
+👤 ${customerName}
+
+📞 ${customerPhone}
+
+📧 ${customerEmail}
+
+🏠 ${customerAddress}
+
+💰 Total: ₹${finalTotal}
+
+🆔 Payment:
+${response.razorpay_payment_id}
+
+`;
+
+const itemsText =
+  cart.map(item => `
+
+• ${item.name}
+  Qty: ${item.qty}
+
+`).join("");
+
+const telegramMessage = `
+
+📦 NEW BOTANORIA ORDER
+
+👤 ${customerName}
+
+📞 ${customerPhone}
+
+📧 ${customerEmail}
+
+🏠 ${customerAddress}
+
+━━━━━━━━━━
+
+🛍 ITEMS
+
+${itemsText}
+
+━━━━━━━━━━
+
+💰 Total:
+₹${finalTotal}
+
+🆔 Payment:
+${response.razorpay_payment_id}
+
+`;
+
+await fetch(
+
+  "https://api.telegram.org/bot8701949299:AAFQVSadaAa6ZOs4NJ3WOf0hzrzBFtDyRXc/sendMessage",
+
+  {
+
+    method:"POST",
+
+    headers:{
+      "Content-Type":
+        "application/json"
+    },
+
+    body:JSON.stringify({
+
+      chat_id:
+        "1033075051",
+
+      text:
+        telegramMessage
+    })
+  }
+);;
+
+
     /* CLEAR CART */
 
     localStorage.removeItem(
