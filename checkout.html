@@ -2,87 +2,166 @@
 <html>
 
 <head>
+
   <title>Checkout</title>
-  <link rel="stylesheet" href="style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
 </head>
-<div class="shipping-strip">
-  <!-- FREE DELIVERY ABOVE ₹1000 -->
-</div>
-<div class="shipping-strip coupon-strip"></div>
+
 <body>
+
+<!-- STRIPS -->
+
+<div class="shipping-strip"></div>
+
+<div class="shipping-strip coupon-strip"></div>
 
 <div class="app">
 
+  <!-- HEADER -->
+
   <div class="header">
-    <div class="logo">BOTANORIA</div>
+
+    <div class="logo">
+      BOTANORIA
+    </div>
+
   </div>
+
+  <!-- CHECKOUT -->
 
   <div class="container checkout-container">
 
     <h2>Checkout</h2>
 
-    <input placeholder="Full Name" class="input">
+    <!-- CUSTOMER INFO -->
 
-    <input placeholder="Phone Number" class="input">
+    <input
+      id="customer-name"
+      placeholder="Full Name"
+      class="input"
+    >
 
-    <textarea placeholder="Address" class="input"></textarea>
+    <input
+      id="customer-phone"
+      placeholder="Phone Number"
+      class="input"
+    >
 
-<div id="checkout-items"></div>
+    <input
+      id="customer-email"
+      class="input"
+      placeholder="Email Address"
+      type="email"
+    >
 
-<div class="coupon-box">
+    <textarea
+      id="customer-address"
+      placeholder="Full Address"
+      class="input"
+    ></textarea>
 
-  <input
-    id="coupon-input"
-    class="input"
-    placeholder="Enter Coupon Code"
-  >
+    <!-- ITEMS -->
 
-  <button
-    class="apply-coupon-btn"
-    onclick="applyCoupon()"
-  >
-    Apply
-  </button>
+    <div id="checkout-items"></div>
 
-</div>
+    <!-- COUPONS -->
 
-<p id="coupon-message"></p>
+    <div class="coupon-box">
+
+      <input
+        id="coupon-input"
+        class="input"
+        placeholder="Enter Coupon Code"
+      >
+
+      <button
+        class="apply-coupon-btn"
+        onclick="applyCoupon()"
+      >
+        Apply
+      </button>
+
+    </div>
+
+    <p id="coupon-message"></p>
+
+    <!-- SUMMARY -->
 
     <div class="checkout-summary">
 
-  <div class="summary-row">
-    <span>Subtotal</span>
-    <span>
-      ₹<span id="checkout-subtotal">0</span>
-    </span>
-  </div>
+      <div class="summary-row">
 
-  <div class="summary-row">
-    <span>Shipping</span>
-    <span id="checkout-shipping">
-      ₹49
-    </span>
-  </div>
+        <span>
+          Subtotal
+        </span>
 
-  <div class="summary-row total-row">
-    <span>Total</span>
-    <span>
-      ₹<span id="checkout-total">0</span>
-    </span>
-  </div>
+        <span>
+          ₹<span id="checkout-subtotal">
+            0
+          </span>
+        </span>
 
+      </div>
 
+      <div class="summary-row">
 
-    <button class="pay-btn">
-      Pay Now
-    </button>
+        <span>
+          Shipping
+        </span>
+
+        <span id="checkout-shipping">
+          ₹49
+        </span>
+
+      </div>
+
+      <div class="summary-row total-row">
+
+        <span>
+          Total
+        </span>
+
+        <span>
+          ₹<span id="checkout-total">
+            0
+          </span>
+        </span>
+
+      </div>
+
+      <!-- PAYMENT BUTTON -->
+
+      <button
+        class="pay-btn"
+        id="pay-btn"
+      >
+        Pay Now
+      </button>
+
+    </div>
 
   </div>
 
 </div>
+
+<!-- RAZORPAY -->
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<!-- CHECKOUT -->
 
 <script src="checkout.js"></script>
 
 </body>
+
 </html>

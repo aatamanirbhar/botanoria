@@ -195,3 +195,145 @@ updateCheckoutTotal();
 
 window.applyCoupon =
   applyCoupon;
+
+
+  /* PAYMENT */
+
+async function startPayment(){
+
+  try{
+
+    const customerName =
+      document.getElementById(
+        "customer-name"
+      ).value;
+
+    const customerPhone =
+      document.getElementById(
+        "customer-phone"
+      ).value;
+
+    const customerEmail =
+      document.getElementById(
+        "customer-email"
+      ).value;
+
+    const customerAddress =
+      document.getElementById(
+        "customer-address"
+      ).value;
+
+    /* BASIC VALIDATION */
+
+    if(
+      !customerName ||
+      !customerPhone ||
+      !customerEmail ||
+      !customerAddress
+    ){
+
+      alert(
+        "Please fill all fields"
+      );
+
+      return;
+    }
+
+    /* CREATE ORDER */
+
+    const response =
+      await fetch(
+        "/api/create-order",
+        {
+
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+
+            amount:finalTotal
+          })
+        }
+      );
+
+    const order =
+      await response.json();
+
+    /* RAZORPAY OPTIONS */
+
+    const options = {
+
+      key:
+        "rzp_test_SayxRYG9e6D0Gv",
+
+      amount:
+        order.amount,
+
+      currency:
+        order.currency,
+
+      name:
+        "BOTANORIA",
+
+      description:
+        "Herbal Care Order",
+
+      order_id:
+        order.id,
+
+      prefill:{
+
+        name:
+          customerName,
+
+        email:
+          customerEmail,
+
+        contact:
+          customerPhone
+      },
+
+      theme:{
+        color:"#111111"
+      },
+
+      handler:function(response){
+
+        console.log(
+          "Payment Success",
+          response
+        );
+
+        alert(
+          "Payment Successful ✨"
+        );
+      }
+    };
+
+    const razorpay =
+      new Razorpay(options);
+
+    razorpay.open();
+
+  } catch(error){
+
+    console.log(error);
+
+    alert(
+      "Payment Failed"
+    );
+  }
+}
+
+/* BUTTON */
+
+document
+  .getElementById("pay-btn")
+  .addEventListener(
+    "click",
+    startPayment
+  );
