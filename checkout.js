@@ -508,16 +508,26 @@ await fetch(
 
 
 
-    const emailItems =
+  const emailItems =
   cart.map(item => `
 
 • ${item.name}
 
-(${item.variantName || "Default"})
+${item.variantName
+  ? `Variant: ${item.variantName}`
+  : ""}
 
 Qty: ${item.qty}
 
+Price:
+₹${item.price * item.qty}
+
 `).join("");
+
+const couponText =
+  appliedCoupon
+    ? `Coupon Applied: ${appliedCoupon}`
+    : "";
 
 await emailjs.send(
 
@@ -525,20 +535,31 @@ await emailjs.send(
 
   "template_yd4n0wk",
 
-  {
+{
 
-    customer_name:
-      customerName,
+  customer_name:
+    customerName,
 
-    customer_email:
-      customerEmail,
+  customer_email:
+    customerEmail,
 
-    total:
-      finalTotal,
+  total:
+    finalTotal,
 
-    order_items:
-      emailItems
-  }
+  order_items:
+    emailItems,
+
+  coupon:
+    couponText,
+
+  discount:
+    discount || 0,
+
+  shipping:
+    shipping === 0
+      ? "FREE"
+      : `₹${shipping}`
+}
 );
     /* SUCCESS PAGE */
 
