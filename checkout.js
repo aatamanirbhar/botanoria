@@ -505,6 +505,41 @@ await fetch(
       "cart"
     );
 
+
+
+
+    const emailItems =
+  cart.map(item => `
+
+• ${item.name}
+
+(${item.variantName || "Default"})
+
+Qty: ${item.qty}
+
+`).join("");
+
+await emailjs.send(
+
+  "service_494g4l7",
+
+  "template_yd4n0wk",
+
+  {
+
+    customer_name:
+      customerName,
+
+    customer_email:
+      customerEmail,
+
+    total:
+      finalTotal,
+
+    order_items:
+      emailItems
+  }
+);
     /* SUCCESS PAGE */
 
     window.location.href =
