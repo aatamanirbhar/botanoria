@@ -411,36 +411,30 @@ async function startPayment(){
       console.log(itemError);
     }
 
-const orderMessage = `
-
-📦 NEW BOTANORIA ORDER
-
-👤 ${customerName}
-
-📞 ${customerPhone}
-
-📧 ${customerEmail}
-
-🏠 ${customerAddress}
-
-💰 Total: ₹${finalTotal}
-
-🆔 Payment:
-${response.razorpay_payment_id}
-
-`;
-
 const itemsText =
   cart.map(item => `
 
 • ${item.name}
-  Qty: ${item.qty}
+
+  Variant:
+  ${item.variantName || "Default"}
+
+  Quantity:
+  ${item.qty}
+
+  Price:
+  ₹${item.price}
+
+  Item Total:
+  ₹${item.price * item.qty}
 
 `).join("");
 
 const telegramMessage = `
 
 📦 NEW BOTANORIA ORDER
+
+━━━━━━━━━━
 
 👤 ${customerName}
 
@@ -458,10 +452,24 @@ ${itemsText}
 
 ━━━━━━━━━━
 
-💰 Total:
+💵 Subtotal:
+₹${subtotal}
+
+🎁 Discount:
+₹${discount}
+
+🏷 Coupon:
+${appliedCoupon || "None"}
+
+🚚 Shipping:
+${shipping === 0 ? "FREE" : `₹${shipping}`}
+
+━━━━━━━━━━
+
+💰 FINAL TOTAL:
 ₹${finalTotal}
 
-🆔 Payment:
+🆔 Payment ID:
 ${response.razorpay_payment_id}
 
 `;
@@ -488,7 +496,7 @@ await fetch(
         telegramMessage
     })
   }
-);;
+);
 
 
     /* CLEAR CART */
