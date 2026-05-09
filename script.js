@@ -590,3 +590,120 @@ if(categoryCarousel){
   });
 
 }
+
+if(categoryCarousel){
+
+  /* AUTO SLIDE */
+
+  let autoScroll = 0;
+
+  let autoSlide = setInterval(() => {
+
+    autoScroll += 340;
+
+    if(
+
+      autoScroll >=
+
+      categoryCarousel.scrollWidth -
+
+      categoryCarousel.clientWidth
+
+    ){
+
+      autoScroll = 0;
+    }
+
+    categoryCarousel.scrollTo({
+
+      left:autoScroll,
+
+      behavior:"smooth"
+
+    });
+
+  }, 3000);
+
+  /* DRAG SUPPORT */
+
+  let isDown = false;
+
+  let startX;
+
+  let scrollLeft;
+
+  categoryCarousel.addEventListener(
+    "mousedown",
+    (e) => {
+
+      isDown = true;
+
+      categoryCarousel.classList.add(
+        "dragging"
+      );
+
+      clearInterval(autoSlide);
+
+      startX =
+        e.pageX -
+        categoryCarousel.offsetLeft;
+
+      scrollLeft =
+        categoryCarousel.scrollLeft;
+    }
+  );
+
+  categoryCarousel.addEventListener(
+    "mouseleave",
+    () => {
+
+      isDown = false;
+
+      categoryCarousel.classList.remove(
+        "dragging"
+      );
+    }
+  );
+
+  categoryCarousel.addEventListener(
+    "mouseup",
+    () => {
+
+      isDown = false;
+
+      categoryCarousel.classList.remove(
+        "dragging"
+      );
+    }
+  );
+
+  categoryCarousel.addEventListener(
+    "mousemove",
+    (e) => {
+
+      if(!isDown) return;
+
+      e.preventDefault();
+
+      const x =
+        e.pageX -
+        categoryCarousel.offsetLeft;
+
+      const walk =
+        (x - startX) * 2;
+
+      categoryCarousel.scrollLeft =
+        scrollLeft - walk;
+    }
+  );
+
+  /* TOUCH SUPPORT */
+
+  categoryCarousel.addEventListener(
+    "touchstart",
+    () => {
+
+      clearInterval(autoSlide);
+    }
+  );
+}

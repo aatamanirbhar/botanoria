@@ -1,7 +1,6 @@
 <!-- oils.html -->
 
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -25,123 +24,229 @@
 </head>
 
 <body data-category="oils">
-    <div id="cart-drawer" class="drawer hidden">
-  <div class="drawer-content">
 
-    <div class="drawer-top">
-      <h3>Your Cart</h3>
-      <span onclick="closeDrawer()">✕</span>
+  <!-- CART DRAWER -->
+
+  <div id="cart-drawer" class="drawer hidden">
+
+    <div class="drawer-content">
+
+      <div class="drawer-top">
+
+        <h3>Your Cart</h3>
+
+        <span onclick="closeDrawer()">
+          ✕
+        </span>
+
+      </div>
+
+      <div id="drawer-items"></div>
+
+      <div class="drawer-footer">
+
+        <h3>
+          Total ₹<span id="drawer-total">0</span>
+        </h3>
+
+        <button
+          class="checkout-btn"
+          onclick="goToCart()"
+        >
+          View Cart
+        </button>
+
+      </div>
+
     </div>
 
-    <div id="drawer-items"></div>
+  </div>
 
-    <div class="drawer-footer">
-      <h3>Total ₹<span id="drawer-total">0</span></h3>
+  <!-- OVERLAY -->
 
-      <button class="checkout-btn" onclick="goToCart()">
-        View Cart
+  <div
+    id="overlay"
+    class="overlay hidden"
+    onclick="closeVariantModal(); closeDrawer();"
+  ></div>
+
+  <!-- VARIANT MODAL -->
+
+  <div id="variant-modal" class="variant-modal hidden">
+
+    <div class="variant-box">
+
+      <button
+        class="variant-close"
+        onclick="closeVariantModal()"
+      >
+        ×
       </button>
+
+      <img
+        id="variant-image"
+        class="variant-image"
+        src=""
+      >
+
+      <h2
+        id="variant-title"
+        class="variant-title"
+      ></h2>
+
+      <p
+        id="variant-price"
+        class="variant-price"
+      ></p>
+
+      <div
+        id="variant-options"
+        class="variant-options"
+      ></div>
+
+      <button
+        class="variant-add-btn"
+        onclick="addVariantToCart()"
+      >
+        Add To Cart
+      </button>
+
+      <button
+        class="variant-cart-btn"
+        onclick="goToCart()"
+      >
+        Go To Cart
+      </button>
+
     </div>
 
   </div>
-</div>
 
-<div id="variant-modal" class="variant-modal hidden">
+  <!-- HERO -->
 
-  <div class="variant-box">
+  <section class="oil-sacred-hero">
 
-    <button
-      class="variant-close"
-      onclick="closeVariantModal()"
-    >
-      ×
-    </button>
+    <div class="oil-overlay"></div>
 
-    <img
-      id="variant-image"
-      class="variant-image"
-      src=""
-    >
+    <div class="oil-particles"></div>
 
-    <h2
-      id="variant-title"
-      class="variant-title"
-    ></h2>
+    <div class="oil-content">
 
-    <p
-      id="variant-price"
-      class="variant-price"
-    ></p>
+      <span class="oil-tag">
+        BOTANORIA OILS ✦
+      </span>
 
-    <div
-      id="variant-options"
-      class="variant-options"
-    ></div>
+      <h1 class="oil-title">
 
-    <button
-      class="variant-add-btn"
-      onclick="addVariantToCart()"
-    >
-      Add To Cart
-    </button>
+        Ancient<br>
+        Ritual Oils
 
-    <button
-      class="variant-cart-btn"
-      onclick="goToCart()"
-    >
-      Go To Cart
-    </button>
-
-  </div>
-
-</div>
-
-  <section class="category-hero oils-hero">
-
-    <div class="category-hero-content">
-
-      <p>
-        BOTANICAL ELIXIRS
-      </p>
-
-      <h1>
-        Ancient Botanical Oils 🌿
       </h1>
 
-      <span>
+      <p class="oil-subtitle">
 
-        Luxurious herbal oils inspired by ancient
-        nourishment rituals and botanical wisdom.
+        Sacred Ayurvedic nourishment
+        crafted through timeless herbal
+        healing traditions.
 
-      </span>
-
-    </div>
-
-  </section>
-
-  <section class="oil-editorial">
-
-    <div class="oil-editorial-content">
-
-      <p>
-        NOW INFUSING
       </p>
 
-      <h2>
-        Cold Pressed Ayurvedic Oils
-      </h2>
+      <a href="#products-grid">
 
-      <span>
+        <button class="oil-main-btn">
+          Explore Collection
+        </button>
 
-        Crafted with deeply nourishing herbs,
-        roots and botanical extracts to restore,
-        strengthen and replenish naturally.
-
-      </span>
+      </a>
 
     </div>
 
   </section>
+
+  <!-- IMMERSIVE OIL EXPERIENCE -->
+
+  <section class="oil-experience">
+
+    <div class="oil-left">
+
+      <span>
+        NEW LAUNCHED ✦
+      </span>
+
+      <h2>
+        Ancient Repair Oil
+      </h2>
+
+      <p>
+
+        A deeply restorative Ayurvedic
+        blend crafted to nourish scalp,
+        roots and timeless wellness rituals.
+
+      </p>
+
+      <button
+        onclick="heroShopNow('YOUR_PRODUCT_ID')"
+      >
+        Shop Ritual
+      </button>
+
+    </div>
+
+    <div class="oil-centerpiece">
+
+      <div class="liquid-ring ring-1"></div>
+
+      <div class="liquid-ring ring-2"></div>
+
+      <div class="liquid-ring ring-3"></div>
+
+      <img
+        src="images/oil.png"
+        class="oil-bottle"
+      >
+
+      <div class="floating-ingredient ingredient-a">
+
+        <h4>
+          Bhringraj
+        </h4>
+
+        <p>
+          Strengthens roots
+        </p>
+
+      </div>
+
+      <div class="floating-ingredient ingredient-b">
+
+        <h4>
+          Amla
+        </h4>
+
+        <p>
+          Boosts vitality
+        </p>
+
+      </div>
+
+      <div class="floating-ingredient ingredient-c">
+
+        <h4>
+          Sesame Oil
+        </h4>
+
+        <p>
+          Deep nourishment
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- PRODUCTS -->
 
   <section class="category-products-section">
 
@@ -152,62 +257,14 @@
 
   </section>
 
-  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <script src="supabase.js"></script>
+
+  <script src="script.js"></script>
+
+  <script src="category.js"></script>
 
 </body>
 
 </html>
-<!-- CART DRAWER -->
-<div id="cart-drawer" class="drawer hidden">
-  <div class="drawer-content">
-
-    <div class="drawer-header">
-      <h2>Your Cart</h2>
-      <button onclick="toggleCart()">✕</button>
-    </div>
-
-    <div id="cart-items"></div>
-
-    <div class="cart-footer">
-      <h3 id="cart-total">Total: ₹0</h3>
-
-      <a href="checkout.html">
-        <button class="checkout-btn">
-          Proceed To Checkout
-        </button>
-      </a>
-    </div>
-
-  </div>
-</div>
-
-<!-- OVERLAY -->
-<div
-  id="overlay"
-  class="overlay hidden"
-  onclick="closeVariantModal(); toggleCart();"
-></div>
-
-<!-- VARIANT MODAL -->
-<div id="variant-modal" class="variant-modal hidden">
-  <div class="variant-modal-content">
-
-    <button
-      class="close-modal"
-      onclick="closeVariantModal()"
-    >
-      ✕
-    </button>
-
-    <div id="variant-modal-body"></div>
-
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-<script src="supabase.js"></script>
-
-<script src="script.js"></script>
-
-<script src="category.js"></script>

@@ -1,7 +1,6 @@
 <!-- hair.html -->
 
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -14,7 +13,7 @@
   >
 
   <title>
-    Hair Rituals | Botanoria
+    Hair Care | Botanoria
   </title>
 
   <link
@@ -26,136 +25,240 @@
 
 <body data-category="hair">
 
-    <div id="cart-drawer" class="drawer hidden">
-  <div class="drawer-content">
+  <!-- CART DRAWER -->
 
-    <div class="drawer-top">
-      <h3>Your Cart</h3>
-      <span onclick="closeDrawer()">✕</span>
+  <div id="cart-drawer" class="drawer hidden">
+
+    <div class="drawer-content">
+
+      <div class="drawer-top">
+
+        <h3>Your Cart</h3>
+
+        <span onclick="closeDrawer()">
+          ✕
+        </span>
+
+      </div>
+
+      <div id="drawer-items"></div>
+
+      <div class="drawer-footer">
+
+        <h3>
+          Total ₹<span id="drawer-total">0</span>
+        </h3>
+
+        <button
+          class="checkout-btn"
+          onclick="goToCart()"
+        >
+          View Cart
+        </button>
+
+      </div>
+
     </div>
 
-    <div id="drawer-items"></div>
+  </div>
 
-    <div class="drawer-footer">
-      <h3>Total ₹<span id="drawer-total">0</span></h3>
+  <!-- OVERLAY -->
 
-      <button class="checkout-btn" onclick="goToCart()">
-        View Cart
+  <div
+    id="overlay"
+    class="overlay hidden"
+    onclick="closeVariantModal(); closeDrawer();"
+  ></div>
+
+  <!-- VARIANT MODAL -->
+
+  <div id="variant-modal" class="variant-modal hidden">
+
+    <div class="variant-box">
+
+      <button
+        class="variant-close"
+        onclick="closeVariantModal()"
+      >
+        ×
       </button>
-    </div>
-
-  </div>
-</div>
-
-<div id="variant-modal" class="variant-modal hidden">
-
-  <div class="variant-box">
-
-    <button
-      class="variant-close"
-      onclick="closeVariantModal()"
-    >
-      ×
-    </button>
-
-    <img
-      id="variant-image"
-      class="variant-image"
-      src=""
-    >
-
-    <h2
-      id="variant-title"
-      class="variant-title"
-    ></h2>
-
-    <p
-      id="variant-price"
-      class="variant-price"
-    ></p>
-
-    <div
-      id="variant-options"
-      class="variant-options"
-    ></div>
-
-    <button
-      class="variant-add-btn"
-      onclick="addVariantToCart()"
-    >
-      Add To Cart
-    </button>
-
-    <button
-      class="variant-cart-btn"
-      onclick="goToCart()"
-    >
-      Go To Cart
-    </button>
-
-  </div>
-
-</div>
-
-  <section class="category-hero hair-hero">
-
-    <div class="category-hero-content">
-
-      <p>
-        BOTANORIA HAIR RITUALS
-      </p>
-
-      <h1>
-        Herbal Hair Rituals 🌿
-      </h1>
-
-      <span>
-
-        Ancient nourishment rituals crafted
-        for healthier roots, softer strands
-        and timeless herbal beauty.
-
-      </span>
-
-    </div>
-
-  </section>
-
-  <section class="launch-section">
-
-    <div class="launch-image">
 
       <img
-        src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=1400&auto=format&fit=crop"
+        id="variant-image"
+        class="variant-image"
+        src=""
+      >
+
+      <h2
+        id="variant-title"
+        class="variant-title"
+      ></h2>
+
+      <p
+        id="variant-price"
+        class="variant-price"
+      ></p>
+
+      <div
+        id="variant-options"
+        class="variant-options"
+      ></div>
+
+      <button
+        class="variant-add-btn"
+        onclick="addVariantToCart()"
+      >
+        Add To Cart
+      </button>
+
+      <button
+        class="variant-cart-btn"
+        onclick="goToCart()"
+      >
+        Go To Cart
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- HERO -->
+
+  <section class="hair-cinematic-hero">
+
+    <div class="hair-overlay"></div>
+
+    <div class="hair-light"></div>
+
+    <div class="hair-content">
+
+      <span class="hair-tag">
+        BOTANORIA HAIR ✦
+      </span>
+
+      <h1 class="hair-title">
+
+        <span>Repair</span>
+        <span>Starts</span>
+        <span>At The Root</span>
+
+      </h1>
+
+      <p class="hair-subtitle">
+
+        Deeply restorative herbal rituals
+        crafted for stronger, healthier,
+        naturally radiant hair.
+
+      </p>
+
+      <div class="hair-buttons">
+
+        <a href="#products-grid">
+
+          <button class="hair-main-btn">
+            Explore Collection
+          </button>
+
+        </a>
+
+      </div>
+
+    </div>
+
+    <div class="hero-product-float">
+
+      <img
+        src="images/shampoo.png"
+        class="hero-bottle"
       >
 
     </div>
 
-    <div class="launch-content">
+  </section>
 
-      <p class="launch-label">
-        NOW LAUNCHING
-      </p>
+  <!-- SHOWCASE -->
 
-      <h2>
-        Rosemary & Hibiscus Elixir
-      </h2>
+  <section class="hair-showcase">
+
+    <div class="showcase-left">
 
       <span>
-
-        Crafted with rosemary, hibiscus and
-        deeply nourishing botanical oils to
-        strengthen roots and restore natural shine.
-
+        NEW LAUNCHED ✦
       </span>
 
-      <button class="launch-btn">
-        Explore Ritual
+      <h2>
+        Rosemary<br>
+        Repair Shampoo
+      </h2>
+
+      <p>
+
+        Powered by rosemary, onion oil
+        and hibiscus for visibly stronger,
+        shinier healthier hair.
+
+      </p>
+
+      <button
+        class="shop-ritual-btn"
+        onclick="heroShopNow('YOUR_PRODUCT_ID')"
+      >
+        Shop Ritual
       </button>
 
     </div>
 
+    <div class="showcase-right">
+
+      <div class="gold-glow"></div>
+
+      <img
+        src="images/shampoo.png"
+        class="showcase-bottle"
+      >
+
+      <div class="ingredient-card ingredient-1">
+
+        <h4>
+          Rosemary
+        </h4>
+
+        <p>
+          Stimulates healthy growth
+        </p>
+
+      </div>
+
+      <div class="ingredient-card ingredient-2">
+
+        <h4>
+          Onion Oil
+        </h4>
+
+        <p>
+          Helps reduce hair fall
+        </p>
+
+      </div>
+
+      <div class="ingredient-card ingredient-3">
+
+        <h4>
+          Hibiscus
+        </h4>
+
+        <p>
+          Restores natural shine
+        </p>
+
+      </div>
+
+    </div>
+
   </section>
+
+  <!-- PRODUCTS -->
 
   <section class="category-products-section">
 
@@ -166,64 +269,14 @@
 
   </section>
 
-  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <script src="supabase.js"></script>
+
+  <script src="script.js"></script>
+
+  <script src="category.js"></script>
 
 </body>
 
 </html>
-
-
-<!-- CART DRAWER -->
-<div id="cart-drawer" class="drawer hidden">
-  <div class="drawer-content">
-
-    <div class="drawer-header">
-      <h2>Your Cart</h2>
-      <button onclick="toggleCart()">✕</button>
-    </div>
-
-    <div id="cart-items"></div>
-
-    <div class="cart-footer">
-      <h3 id="cart-total">Total: ₹0</h3>
-
-      <a href="checkout.html">
-        <button class="checkout-btn">
-          Proceed To Checkout
-        </button>
-      </a>
-    </div>
-
-  </div>
-</div>
-
-<!-- OVERLAY -->
-<div
-  id="overlay"
-  class="overlay hidden"
-  onclick="closeVariantModal(); toggleCart();"
-></div>
-
-<!-- VARIANT MODAL -->
-<div id="variant-modal" class="variant-modal hidden">
-  <div class="variant-modal-content">
-
-    <button
-      class="close-modal"
-      onclick="closeVariantModal()"
-    >
-      ✕
-    </button>
-
-    <div id="variant-modal-body"></div>
-
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-<script src="supabase.js"></script>
-
-<script src="script.js"></script>
-
-<script src="category.js"></script>

@@ -1,7 +1,6 @@
 <!-- soap.html -->
 
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -14,7 +13,7 @@
   >
 
   <title>
-    Botanical Soaps | Botanoria
+    Skin Care | Botanoria
   </title>
 
   <link
@@ -25,122 +24,189 @@
 </head>
 
 <body data-category="soap">
-    <div id="cart-drawer" class="drawer hidden">
-  <div class="drawer-content">
 
-    <div class="drawer-top">
-      <h3>Your Cart</h3>
-      <span onclick="closeDrawer()">✕</span>
+  <!-- CART DRAWER -->
+
+  <div id="cart-drawer" class="drawer hidden">
+
+    <div class="drawer-content">
+
+      <div class="drawer-top">
+
+        <h3>Your Cart</h3>
+
+        <span onclick="closeDrawer()">
+          ✕
+        </span>
+
+      </div>
+
+      <div id="drawer-items"></div>
+
+      <div class="drawer-footer">
+
+        <h3>
+          Total ₹<span id="drawer-total">0</span>
+        </h3>
+
+        <button
+          class="checkout-btn"
+          onclick="goToCart()"
+        >
+          View Cart
+        </button>
+
+      </div>
+
     </div>
 
-    <div id="drawer-items"></div>
+  </div>
 
-    <div class="drawer-footer">
-      <h3>Total ₹<span id="drawer-total">0</span></h3>
+  <!-- OVERLAY -->
 
-      <button class="checkout-btn" onclick="goToCart()">
-        View Cart
+  <div
+    id="overlay"
+    class="overlay hidden"
+    onclick="closeVariantModal(); closeDrawer();"
+  ></div>
+
+  <!-- VARIANT MODAL -->
+
+  <div id="variant-modal" class="variant-modal hidden">
+
+    <div class="variant-box">
+
+      <button
+        class="variant-close"
+        onclick="closeVariantModal()"
+      >
+        ×
       </button>
+
+      <img
+        id="variant-image"
+        class="variant-image"
+        src=""
+      >
+
+      <h2
+        id="variant-title"
+        class="variant-title"
+      ></h2>
+
+      <p
+        id="variant-price"
+        class="variant-price"
+      ></p>
+
+      <div
+        id="variant-options"
+        class="variant-options"
+      ></div>
+
+      <button
+        class="variant-add-btn"
+        onclick="addVariantToCart()"
+      >
+        Add To Cart
+      </button>
+
+      <button
+        class="variant-cart-btn"
+        onclick="goToCart()"
+      >
+        Go To Cart
+      </button>
+
     </div>
 
   </div>
-</div>
-<div id="variant-modal" class="variant-modal hidden">
 
-  <div class="variant-box">
+  <!-- HERO -->
 
-    <button
-      class="variant-close"
-      onclick="closeVariantModal()"
-    >
-      ×
-    </button>
+  <section class="soap-editorial-hero">
 
-    <img
-      id="variant-image"
-      class="variant-image"
-      src=""
-    >
+    <div class="soap-overlay"></div>
 
-    <h2
-      id="variant-title"
-      class="variant-title"
-    ></h2>
+    <div class="soap-content">
 
-    <p
-      id="variant-price"
-      class="variant-price"
-    ></p>
+   
 
-    <div
-      id="variant-options"
-      class="variant-options"
-    ></div>
+  
 
-    <button
-      class="variant-add-btn"
-      onclick="addVariantToCart()"
-    >
-      Add To Cart
-    </button>
 
-    <button
-      class="variant-cart-btn"
-      onclick="goToCart()"
-    >
-      Go To Cart
-    </button>
+    </div>
 
-  </div>
+  </section>
 
-</div>
+  <!-- 3D SOAP SHOWCASE -->
 
-  <section class="category-hero soap-hero">
+  <section class="soap-3d-section">
 
-    <div class="category-hero-content">
-
-      <p>
-        BOTANORIA SOAP RITUALS
-      </p>
-
-      <h1>
-        Botanical Soap Rituals 🫧
-      </h1>
+    <div class="soap-intro">
 
       <span>
-
-        Handcrafted herbal cleansing rituals
-        inspired by timeless Ayurvedic traditions.
-
+        NEW LAUNCHED ✦
       </span>
+
+      <h2>
+        Glow Ritual Soap
+      </h2>
+
+      <p>
+
+        A luxurious botanical cleansing
+        ritual crafted for radiant,
+        nourished glowing skin.
+
+      </p>
+
+      <button
+        onclick="heroShopNow('YOUR_PRODUCT_ID')"
+      >
+        Shop Ritual
+      </button>
+
+    </div>
+
+    <div class="soap-stage">
+
+      <div class="soap-aura"></div>
+
+      <img
+        src="images/soap.png"
+        class="rotating-soap"
+      >
+
+      <div class="orbit orbit-1">
+
+        <span>
+          Saffron ✦ Brightens
+        </span>
+
+      </div>
+
+      <div class="orbit orbit-2">
+
+        <span>
+          Goat Milk ✦ Hydrates
+        </span>
+
+      </div>
+
+      <div class="orbit orbit-3">
+
+        <span>
+          Turmeric ✦ Glows
+        </span>
+
+      </div>
 
     </div>
 
   </section>
 
-  <section class="soap-editorial">
-
-    <p>
-      NEW HANDCRAFTED COLLECTION
-    </p>
-
-    <h2>
-      Neem & Saffron Bath Bars ✨
-    </h2>
-
-    <span>
-
-      Small-batch herbal soap bars infused with
-      nourishing oils, botanical extracts and
-      luxurious cleansing rituals.
-
-    </span>
-
-    <img
-      src="https://images.unsplash.com/photo-1607006483225-1f0c1c0c3f08?q=80&w=1400&auto=format&fit=crop"
-    >
-
-  </section>
+  <!-- PRODUCTS -->
 
   <section class="category-products-section">
 
@@ -151,61 +217,14 @@
 
   </section>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
+  <script src="supabase.js"></script>
+
+  <script src="script.js"></script>
+
+  <script src="category.js"></script>
 
 </body>
 
 </html>
-<!-- CART DRAWER -->
-<div id="cart-drawer" class="drawer hidden">
-  <div class="drawer-content">
-
-    <div class="drawer-header">
-      <h2>Your Cart</h2>
-      <button onclick="toggleCart()">✕</button>
-    </div>
-
-    <div id="cart-items"></div>
-
-    <div class="cart-footer">
-      <h3 id="cart-total">Total: ₹0</h3>
-
-      <a href="checkout.html">
-        <button class="checkout-btn">
-          Proceed To Checkout
-        </button>
-      </a>
-    </div>
-
-  </div>
-</div>
-
-<!-- OVERLAY -->
-<div
-  id="overlay"
-  class="overlay hidden"
-  onclick="closeVariantModal(); toggleCart();"
-></div>
-
-<!-- VARIANT MODAL -->
-<div id="variant-modal" class="variant-modal hidden">
-  <div class="variant-modal-content">
-
-    <button
-      class="close-modal"
-      onclick="closeVariantModal()"
-    >
-      ✕
-    </button>
-
-    <div id="variant-modal-body"></div>
-
-  </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-<script src="supabase.js"></script>
-
-<script src="script.js"></script>
-
-<script src="category.js"></script>
