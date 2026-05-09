@@ -475,3 +475,102 @@ window.addEventListener(
     }
   }
 );
+
+const categories = [
+
+  {
+
+    name:
+      "Hair Care",
+
+    description:
+      "Nourish roots naturally",
+
+    image:
+      "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=1200&auto=format&fit=crop",
+
+    link:
+      "hair.html"
+  },
+
+  {
+
+    name:
+      "Skin Care",
+
+    description:
+      "Timeless herbal glow",
+
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop",
+
+    link:
+      "soap.html"
+  },
+
+  {
+
+    name:
+      "Wellness",
+
+    description:
+      "Rituals for mindful living",
+
+    image:
+      "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1200&auto=format&fit=crop",
+
+    link:
+      "wellness.html"
+  },
+
+  {
+
+    name:
+      "Herbal Oils",
+
+    description:
+      "Ancient nourishment rituals",
+
+    image:
+      "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?q=80&w=1200&auto=format&fit=crop",
+
+    link:
+      "oils.html"
+  }
+
+];
+
+const categoryCarousel =
+  document.getElementById(
+    "category-carousel"
+  );
+
+categories.forEach(category => {
+
+  categoryCarousel.innerHTML += `
+
+    <a
+      href="${category.link}"
+      class="category-card"
+    >
+
+      <img
+        src="${category.image}"
+      >
+
+      <div class="category-overlay">
+
+        <h3>
+          ${category.name}
+        </h3>
+
+        <p>
+          ${category.description}
+        </p>
+
+      </div>
+
+    </a>
+
+  `;
+});

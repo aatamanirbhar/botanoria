@@ -1208,3 +1208,319 @@ textarea.input {
 
   height:18px;
 }
+
+.category-section{
+
+  padding:
+    80px 20px;
+
+  background:
+    #f8f5ef;
+}
+
+.category-header{
+
+  text-align:center;
+
+  margin-bottom:40px;
+}
+
+.category-label{
+
+  font-size:12px;
+
+  letter-spacing:2px;
+
+  color:#777;
+
+  margin-bottom:10px;
+}
+
+.category-header h2{
+
+  font-size:34px;
+
+  font-weight:500;
+}
+
+.category-carousel{
+
+  display:flex;
+
+  gap:20px;
+
+  overflow-x:auto;
+
+  scroll-snap-type:x mandatory;
+
+  padding-bottom:10px;
+}
+
+.category-carousel::-webkit-scrollbar{
+
+  display:none;
+}
+
+.category-card{
+
+  position:relative;
+
+  min-width:300px;
+
+  height:420px;
+
+  border-radius:28px;
+
+  overflow:hidden;
+
+  flex-shrink:0;
+
+  scroll-snap-align:start;
+
+  text-decoration:none;
+
+  color:white;
+}
+
+.category-card img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+  transition:
+    transform 0.5s ease;
+}
+
+.category-card:hover img{
+
+  transform:scale(1.05);
+}
+
+.category-overlay{
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,0.55),
+      rgba(0,0,0,0.05)
+    );
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:flex-end;
+
+  padding:28px;
+}
+
+.category-overlay h3{
+
+  font-size:30px;
+
+  margin-bottom:8px;
+
+  font-weight:500;
+}
+
+.category-overlay p{
+
+  font-size:15px;
+
+  opacity:0.9;
+
+  line-height:1.6;
+}
+
+.category-hero{
+
+  height:58vh;
+
+  background:
+    linear-gradient(
+      rgba(0,0,0,0.35),
+      rgba(0,0,0,0.35)
+    ),
+
+    url("https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=1600&auto=format&fit=crop");
+
+  background-size:cover;
+
+  background-position:center;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  padding:20px;
+
+  color:white;
+}
+
+.category-hero-content p{
+
+  letter-spacing:3px;
+
+  font-size:12px;
+
+  margin-bottom:14px;
+
+  opacity:0.85;
+}
+
+.category-hero-content h1{
+
+  font-size:54px;
+
+  margin-bottom:18px;
+
+  font-weight:500;
+}
+
+.category-hero-content span{
+
+  max-width:620px;
+
+  display:block;
+
+  line-height:1.8;
+
+  font-size:16px;
+
+  opacity:0.95;
+}
+
+.category-products-section{
+
+  padding:
+    90px 24px;
+
+  background:#f8f5ef;
+}
+
+.products-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(260px,1fr)
+    );
+
+  gap:34px;
+
+  max-width:1400px;
+
+  margin:auto;
+}
+
+.premium-product-card{
+
+  background:white;
+
+  border-radius:28px;
+
+  overflow:hidden;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+
+  box-shadow:
+    0 8px 30px
+    rgba(0,0,0,0.06);
+}
+
+.premium-product-card:hover{
+
+  transform:
+    translateY(-6px);
+
+  box-shadow:
+    0 14px 40px
+    rgba(0,0,0,0.08);
+}
+
+.product-image-wrap{
+
+  overflow:hidden;
+}
+
+.product-image-wrap img{
+
+  width:100%;
+
+  height:320px;
+
+  object-fit:cover;
+
+  transition:
+    transform 0.5s ease;
+}
+
+.premium-product-card:hover
+.product-image-wrap img{
+
+  transform:scale(1.05);
+}
+
+.premium-product-info{
+
+  padding:24px;
+}
+
+.premium-product-info h3{
+
+  font-size:22px;
+
+  margin-bottom:12px;
+
+  font-weight:500;
+}
+
+.premium-price{
+
+  font-size:18px;
+
+  margin-bottom:20px;
+
+  color:#444;
+}
+
+.premium-btn{
+
+  width:100%;
+
+  border:none;
+
+  background:#111;
+
+  color:white;
+
+  padding:14px;
+
+  border-radius:999px;
+
+  font-size:14px;
+
+  cursor:pointer;
+
+  transition:0.3s ease;
+}
+
+.premium-btn:hover{
+
+  opacity:0.82;
+}

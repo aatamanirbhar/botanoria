@@ -5,8 +5,8 @@ async function loadAdminProducts(){
       .from("products")
       .select("*")
       .order("id", {
-  ascending:false
-});
+        ascending:false
+      });
 
   if(error){
     console.log(error);
@@ -14,7 +14,9 @@ async function loadAdminProducts(){
   }
 
   const el =
-    document.getElementById("admin-products");
+    document.getElementById(
+      "admin-products"
+    );
 
   el.innerHTML = "";
 
@@ -31,34 +33,48 @@ async function loadAdminProducts(){
 
         <div class="admin-info">
 
-          <h3>${product.name}</h3>
+          <h3>
+            ${product.name}
+          </h3>
 
-          <p>${product.description}</p>
+          <p>
+            ${product.description}
+          </p>
 
-          <h4>₹${product.price}</h4>
+          <h4>
+            ₹${product.price}
+          </h4>
 
-         <div class="admin-actions">
+          <p class="admin-category">
 
-  <button
-    class="admin-edit-btn"
-    onclick="editProduct('${product.id}')"
-  >
-    Edit
-  </button>
-<button
-  class="admin-variant-btn"
-  onclick="openVariantManager('${product.id}')"
->
-  Variants
-</button>
-  <button
-    class="admin-delete-btn"
-    onclick="deleteProduct('${product.id}')"
-  >
-    Delete
-  </button>
+            ${product.category || "Uncategorized"}
 
-</div>
+          </p>
+
+          <div class="admin-actions">
+
+            <button
+              class="admin-edit-btn"
+              onclick="editProduct('${product.id}')"
+            >
+              Edit
+            </button>
+
+            <button
+              class="admin-variant-btn"
+              onclick="openVariantManager('${product.id}')"
+            >
+              Variants
+            </button>
+
+            <button
+              class="admin-delete-btn"
+              onclick="deleteProduct('${product.id}')"
+            >
+              Delete
+            </button>
+
+          </div>
 
         </div>
 
@@ -71,7 +87,9 @@ async function loadAdminProducts(){
 function openAddProductModal(){
 
   document
-    .getElementById("product-modal")
+    .getElementById(
+      "product-modal"
+    )
     .classList
     .remove("hidden");
 }
@@ -79,12 +97,13 @@ function openAddProductModal(){
 function closeProductModal(){
 
   editingProductId = null;
-  
 
   clearProductForm();
 
   document
-    .getElementById("product-modal")
+    .getElementById(
+      "product-modal"
+    )
     .classList
     .add("hidden");
 }
@@ -92,38 +111,59 @@ function closeProductModal(){
 async function addProduct(){
 
   const name =
-    document.getElementById("product-name").value;
+    document.getElementById(
+      "product-name"
+    ).value;
 
   const description =
-    document.getElementById("product-description").value;
+    document.getElementById(
+      "product-description"
+    ).value;
 
   const price =
-    document.getElementById("product-price").value;
+    document.getElementById(
+      "product-price"
+    ).value;
 
   const image =
-    document.getElementById("product-image").value;
+    document.getElementById(
+      "product-image"
+    ).value;
 
-    const has_variants =
-  document.getElementById(
-    "product-has-variants"
-  ).checked;
+  const category =
+    document.getElementById(
+      "product-category"
+    ).value;
+
+  const has_variants =
+    document.getElementById(
+      "product-has-variants"
+    ).checked;
 
   if(editingProductId){
 
     const { error } =
       await supabaseClient
         .from("products")
-      .update({
-  name,
-  description,
-  price,
-  image,
-  has_variants
-})
-        .eq("id", editingProductId);
+        .update({
+
+          name,
+          description,
+          price,
+          image,
+          category,
+          has_variants
+
+        })
+        .eq(
+          "id",
+          editingProductId
+        );
 
     if(error){
+
       console.log(error);
+
       return;
     }
 
@@ -132,22 +172,26 @@ async function addProduct(){
     const { error } =
       await supabaseClient
         .from("products")
-       .insert([{
-  name,
-  description,
-  price,
-  image,
-  has_variants
-}]);
+        .insert([{
+
+          name,
+          description,
+          price,
+          image,
+          category,
+          has_variants
+
+        }]);
 
     if(error){
+
       console.log(error);
+
       return;
     }
   }
 
   editingProductId = null;
-  
 
   clearProductForm();
 
@@ -166,7 +210,9 @@ async function editProduct(id){
       .single();
 
   if(error){
+
     console.log(error);
+
     return;
   }
 
@@ -189,35 +235,39 @@ async function editProduct(id){
   ).value = data.image;
 
   document.getElementById(
-  "product-image-preview"
-).src = data.image;
-
-document.getElementById(
-  "product-image-preview"
-).classList.remove("hidden");
+    "product-category"
+  ).value =
+    data.category || "";
 
   document.getElementById(
-  "product-has-variants"
-).checked =
-  data.has_variants;
+    "product-image-preview"
+  ).src = data.image;
+
+  document.getElementById(
+    "product-image-preview"
+  ).classList.remove("hidden");
+
+  document.getElementById(
+    "product-has-variants"
+  ).checked =
+    data.has_variants;
 
   openAddProductModal();
 }
 
-
 function clearProductForm(){
 
   document.getElementById(
-  "product-image-file"
-).value = "";
+    "product-image-file"
+  ).value = "";
 
-document.getElementById(
-  "product-image-preview"
-).src = "";
+  document.getElementById(
+    "product-image-preview"
+  ).src = "";
 
-document.getElementById(
-  "product-image-preview"
-).classList.add("hidden");
+  document.getElementById(
+    "product-image-preview"
+  ).classList.add("hidden");
 
   document.getElementById(
     "product-name"
@@ -236,10 +286,13 @@ document.getElementById(
   ).value = "";
 
   document.getElementById(
-  "product-has-variants"
-).checked = false;
-}
+    "product-category"
+  ).value = "";
 
+  document.getElementById(
+    "product-has-variants"
+  ).checked = false;
+}
 
 async function uploadProductImage(){
 
@@ -260,7 +313,9 @@ async function uploadProductImage(){
       .upload(fileName, file);
 
   if(error){
+
     console.log(error);
+
     return;
   }
 
@@ -296,14 +351,15 @@ document
   );
 
 let editingProductId = null;
+
 let currentVariantProductId = null;
-
-
 
 async function deleteProduct(id){
 
   const yes =
-    confirm("Delete product?");
+    confirm(
+      "Delete product?"
+    );
 
   if(!yes) return;
 
@@ -314,7 +370,9 @@ async function deleteProduct(id){
       .eq("id", id);
 
   if(error){
+
     console.log(error);
+
     return;
   }
 
@@ -323,7 +381,8 @@ async function deleteProduct(id){
 
 async function openVariantManager(productId){
 
-  currentVariantProductId = productId;
+  currentVariantProductId =
+    productId;
 
   document
     .getElementById(
@@ -332,7 +391,9 @@ async function openVariantManager(productId){
     .classList
     .remove("hidden");
 
-  const { data: product } =
+  const {
+    data: product
+  } =
     await supabaseClient
       .from("products")
       .select("*")
@@ -349,22 +410,35 @@ async function openVariantManager(productId){
 
 async function loadVariants(productId){
 
-  const { data, error } =
+  const {
+    data,
+    error
+  } =
     await supabaseClient
       .from("product_variants")
       .select("*")
-      .eq("product_id", productId)
-      .order("created_at", {
-        ascending:false
-      });
+      .eq(
+        "product_id",
+        productId
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
 
   if(error){
+
     console.log(error);
+
     return;
   }
 
   const el =
-    document.getElementById("admin-variants");
+    document.getElementById(
+      "admin-variants"
+    );
 
   el.innerHTML = "";
 
@@ -376,12 +450,19 @@ async function loadVariants(productId){
 
         <div>
 
-          <h4>${variant.name}</h4>
+          <h4>
+            ${variant.name}
+          </h4>
 
           <p>
+
             ₹${variant.price}
+
             •
-            Stock: ${variant.stock}
+
+            Stock:
+            ${variant.stock}
+
           </p>
 
         </div>
@@ -402,21 +483,30 @@ async function loadVariants(productId){
 async function addVariant(){
 
   const name =
-    document.getElementById("variant-name").value;
+    document.getElementById(
+      "variant-name"
+    ).value;
 
   const price =
-    document.getElementById("variant-price").value;
+    document.getElementById(
+      "variant-price"
+    ).value;
 
   const stock =
-    document.getElementById("variant-stock").value;
+    document.getElementById(
+      "variant-stock"
+    ).value;
 
   const image =
-    document.getElementById("variant-image").value;
+    document.getElementById(
+      "variant-image"
+    ).value;
 
   const { error } =
     await supabaseClient
       .from("product_variants")
       .insert([{
+
         product_id:
           currentVariantProductId,
 
@@ -424,22 +514,29 @@ async function addVariant(){
         price,
         stock,
         image
+
       }]);
 
   if(error){
+
     console.log(error);
+
     return;
   }
 
   clearVariantForm();
 
-  loadVariants(currentVariantProductId);
+  loadVariants(
+    currentVariantProductId
+  );
 }
 
 async function deleteVariant(id){
 
   const yes =
-    confirm("Delete variant?");
+    confirm(
+      "Delete variant?"
+    );
 
   if(!yes) return;
 
@@ -450,11 +547,15 @@ async function deleteVariant(id){
       .eq("id", id);
 
   if(error){
+
     console.log(error);
+
     return;
   }
 
-  loadVariants(currentVariantProductId);
+  loadVariants(
+    currentVariantProductId
+  );
 }
 
 function clearVariantForm(){
@@ -507,7 +608,7 @@ window.deleteProduct =
 window.editProduct =
   editProduct;
 
-  window.openVariantManager =
+window.openVariantManager =
   openVariantManager;
 
 window.closeVariantManager =

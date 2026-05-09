@@ -1,0 +1,171 @@
+<!-- oils.html -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Herbal Oils | Botanoria
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+</head>
+
+<body data-category="oils">
+    <div id="cart-drawer" class="drawer hidden">
+  <div class="drawer-content">
+
+    <div class="drawer-top">
+      <h3>Your Cart</h3>
+      <span onclick="closeDrawer()">✕</span>
+    </div>
+
+    <div id="drawer-items"></div>
+
+    <div class="drawer-footer">
+      <h3>Total ₹<span id="drawer-total">0</span></h3>
+
+      <button class="checkout-btn" onclick="goToCart()">
+        View Cart
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div id="variant-modal" class="variant-modal hidden">
+
+  <div class="variant-box">
+
+    <button
+      class="variant-close"
+      onclick="closeVariantModal()"
+    >
+      ×
+    </button>
+
+    <img
+      id="variant-image"
+      class="variant-image"
+      src=""
+    >
+
+    <h2
+      id="variant-title"
+      class="variant-title"
+    ></h2>
+
+    <p
+      id="variant-price"
+      class="variant-price"
+    ></p>
+
+    <div
+      id="variant-options"
+      class="variant-options"
+    ></div>
+
+    <button
+      class="variant-add-btn"
+      onclick="addVariantToCart()"
+    >
+      Add To Cart
+    </button>
+
+    <button
+      class="variant-cart-btn"
+      onclick="goToCart()"
+    >
+      Go To Cart
+    </button>
+
+  </div>
+
+</div>
+
+  <section class="category-hero oils-hero">
+
+    <div class="category-hero-content">
+
+      <p>
+        BOTANICAL ELIXIRS
+      </p>
+
+      <h1>
+        Ancient Botanical Oils 🌿
+      </h1>
+
+      <span>
+
+        Luxurious herbal oils inspired by ancient
+        nourishment rituals and botanical wisdom.
+
+      </span>
+
+    </div>
+
+  </section>
+
+  <section class="oil-editorial">
+
+    <div class="oil-editorial-content">
+
+      <p>
+        NOW INFUSING
+      </p>
+
+      <h2>
+        Cold Pressed Ayurvedic Oils
+      </h2>
+
+      <span>
+
+        Crafted with deeply nourishing herbs,
+        roots and botanical extracts to restore,
+        strengthen and replenish naturally.
+
+      </span>
+
+    </div>
+
+  </section>
+
+  <section class="category-products-section">
+
+    <div
+      class="products-grid"
+      id="products-grid"
+    ></div>
+
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <script src="supabase.js"></script>
+
+  <script src="category.js"></script>
+
+</body>
+
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script src="supabase.js"></script>
+
+<script src="script.js"></script>
+
+<script src="category.js"></script>

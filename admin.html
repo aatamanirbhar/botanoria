@@ -1,10 +1,17 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
-  <title>BOTANORIA Admin</title>
 
-  <link rel="stylesheet" href="style.css">
+  <title>
+    BOTANORIA Admin
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 
   <meta
     name="viewport"
@@ -12,6 +19,7 @@
   >
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
 </head>
 
 <body>
@@ -30,7 +38,9 @@
 
     <div class="admin-top">
 
-      <h1>Products</h1>
+      <h1>
+        Products
+      </h1>
 
       <button
         class="admin-add-btn"
@@ -63,7 +73,9 @@
       ×
     </span>
 
-    <h2>Add Product</h2>
+    <h2>
+      Add Product
+    </h2>
 
     <input
       id="product-name"
@@ -84,34 +96,61 @@
       type="number"
     >
 
-   <input
-  type="file"
-  id="product-image-file"
-  class="input"
-  accept="image/*"
->
+    <select
+      id="product-category"
+      class="input"
+    >
 
-<img
-  id="product-image-preview"
-  class="admin-preview hidden"
->
+      <option value="">
+        Select Category
+      </option>
 
-<input
-  id="product-image"
-  class="input hidden"
-  placeholder="Image URL"
-/>
+      <option value="hair">
+        Hair
+      </option>
+
+      <option value="soap">
+        Soap
+      </option>
+
+      <option value="wellness">
+        Wellness
+      </option>
+
+      <option value="oils">
+        Oils
+      </option>
+
+    </select>
+
+    <input
+      type="file"
+      id="product-image-file"
+      class="input"
+      accept="image/*"
+    >
+
+    <img
+      id="product-image-preview"
+      class="admin-preview hidden"
+    >
+
+    <input
+      id="product-image"
+      class="input hidden"
+      placeholder="Image URL"
+    />
 
     <label class="admin-checkbox">
 
-  <input
-    type="checkbox"
-    id="product-has-variants"
-  >
+      <input
+        type="checkbox"
+        id="product-has-variants"
+      >
 
-  This product has variants
+      This product has variants
 
-</label>
+    </label>
 
     <button
       class="variant-add-btn"
@@ -186,7 +225,9 @@
 </div>
 
 <script src="supabase.js"></script>
+
 <script src="admin.js"></script>
 
 </body>
+
 </html>
