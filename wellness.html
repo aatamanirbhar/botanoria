@@ -120,15 +120,15 @@
   </div>
 
   <!-- HERO -->
-  <section class="category-hero wellness-hero">
+  <!-- <section class="category-hero wellness-hero">
 
     <div class="category-hero-content">
 
       <p>
         BOTANORIA WELLNESS
-      </p>
+      </p> -->
 
-      <h1>
+      <!-- <h1>
         Wellness Rituals ✨
       </h1>
 
@@ -141,9 +141,153 @@
 
     </div>
 
-  </section>
+  </section> -->
 
-  <!-- QUOTE -->
+  <section class="cinematic-hero">
+
+  <img
+    src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1800&auto=format&fit=crop"
+    class="hero-bg"
+  >
+
+  <div class="hero-darkness"></div>
+
+  <div class="hero-topbar">
+
+ 
+
+  </div>
+
+  <div class="hero-editorial">
+
+   <h1 class="typewriter">
+
+  <span id="typed-text"></span>
+
+ 
+
+</h1>
+
+    <p>
+
+      Crafted for mindful mornings,
+      grounding evenings and deeply
+      restorative herbal living.
+
+    </p>
+
+    <a href="#products-grid">
+
+  <button>
+    Explore Collection
+  </button>
+
+</a>
+
+  </div>
+
+  <div class="hero-product-card">
+
+    <img
+      src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1200&auto=format&fit=crop"
+    >
+
+    <div class="product-card-info">
+
+      <span>
+        Featured Ritual
+      </span>
+
+      <h3>
+        Wellness Elixir
+      </h3>
+
+      <p>
+        Botanical adaptogenic blend
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+  <section class="product-showcase">
+
+  <div class="showcase-left">
+
+    <span>
+      NEW LAUNCHED ✦
+    </span>
+
+    <h2>
+      Ayurvedic Repair Shampoo
+    </h2>
+
+    <p>
+
+      Deep scalp nourishment powered
+      by timeless herbal rituals and
+      botanical repair technology.
+
+    </p>
+
+ <button
+  onclick="heroShopNow('46ad2ddb-ca6d-4077-ada1-7ce03b48f12c')"
+>
+  Shop Now
+</button>
+
+  </div>
+
+  <div class="showcase-center">
+
+    <div class="product-glow"></div>
+
+    <img
+      src="images/shampoo.png"
+      class="floating-product"
+    >
+
+    <div class="benefit-card card-1">
+
+      <h4>
+        Rosemary
+      </h4>
+
+      <p>
+        Strengthens roots
+      </p>
+
+    </div>
+
+    <div class="benefit-card card-2">
+
+      <h4>
+        Onion Extract
+      </h4>
+
+      <p>
+        Reduces hair fall
+      </p>
+
+    </div>
+
+    <div class="benefit-card card-3">
+
+      <h4>
+        Hibiscus
+      </h4>
+
+      <p>
+        Restores shine
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
   <section class="wellness-editorial">
 
     <blockquote>
@@ -174,6 +318,32 @@
 
   <script src="category.js"></script>
 
+
+  <script>
+
+const text =
+`Rituals
+For Stillness`;
+
+let index = 0;
+
+function typeWriter(){
+
+  if(index < text.length){
+
+    document.getElementById(
+      "typed-text"
+    ).innerHTML += text.charAt(index);
+
+    index++;
+
+    setTimeout(typeWriter, 70);
+  }
+}
+
+window.onload = typeWriter;
+
+</script>
 </body>
 
 </html>

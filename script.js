@@ -415,6 +415,33 @@ async function openVariantModal(productId){
   });
 }
 
+async function heroShopNow(productId){
+
+  const variants =
+    await getVariants(productId);
+
+  if(variants.length){
+
+    openVariantModal(productId);
+
+    return;
+  }
+
+  const { data: product } =
+    await supabaseClient
+      .from("products")
+      .select("*")
+      .eq("id", productId)
+      .single();
+
+  if(product){
+
+    addToCart(product);
+  }
+}
+
+window.heroShopNow = heroShopNow;
+
 /* CLOSE VARIANT MODAL */
 function closeVariantModal(){
 
