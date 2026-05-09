@@ -151,15 +151,57 @@
 
   </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-  <script src="supabase.js"></script>
-
-  <script src="category.js"></script>
 
 </body>
 
 </html>
+<!-- CART DRAWER -->
+<div id="cart-drawer" class="drawer hidden">
+  <div class="drawer-content">
+
+    <div class="drawer-header">
+      <h2>Your Cart</h2>
+      <button onclick="toggleCart()">✕</button>
+    </div>
+
+    <div id="cart-items"></div>
+
+    <div class="cart-footer">
+      <h3 id="cart-total">Total: ₹0</h3>
+
+      <a href="checkout.html">
+        <button class="checkout-btn">
+          Proceed To Checkout
+        </button>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- OVERLAY -->
+<div
+  id="overlay"
+  class="overlay hidden"
+  onclick="closeVariantModal(); toggleCart();"
+></div>
+
+<!-- VARIANT MODAL -->
+<div id="variant-modal" class="variant-modal hidden">
+  <div class="variant-modal-content">
+
+    <button
+      class="close-modal"
+      onclick="closeVariantModal()"
+    >
+      ✕
+    </button>
+
+    <div id="variant-modal-body"></div>
+
+  </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
 <script src="supabase.js"></script>

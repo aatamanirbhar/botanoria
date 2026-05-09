@@ -9,7 +9,7 @@ const category =
 async function loadProducts(){
 
   const {
-    data:products,
+    data: products,
     error
   } = await supabaseClient
 
@@ -28,6 +28,8 @@ async function loadProducts(){
 
     return;
   }
+
+  if(!productsGrid) return;
 
   productsGrid.innerHTML = "";
 
@@ -56,12 +58,31 @@ async function loadProducts(){
             ₹${product.price}
           </p>
 
-          <button
-            class="premium-btn"
-            onclick='openProductModal(${JSON.stringify(product)})'
-          >
-            Add To Cart
-          </button>
+          ${
+            product.has_variants
+
+            ? `
+
+              <button
+                class="premium-btn"
+                onclick="openVariantModal('${product.id}')"
+              >
+                Choose Options
+              </button>
+
+            `
+
+            : `
+
+              <button
+                class="premium-btn"
+                onclick='addToCart(${JSON.stringify(product)})'
+              >
+                Add To Cart
+              </button>
+
+            `
+          }
 
         </div>
 
@@ -70,7 +91,5 @@ async function loadProducts(){
     `;
   });
 }
-
-
 
 loadProducts();

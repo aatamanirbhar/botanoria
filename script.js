@@ -36,7 +36,7 @@ function addVariantToCart(){
 
   if(!selectedVariant) return;
 
-  let cart =
+  cart =
     JSON.parse(
       localStorage.getItem("cart")
     ) || [];
@@ -98,6 +98,8 @@ function showCartPopup() {
   const items =
     document.getElementById("drawer-items");
 
+  if(!drawer || !items) return;
+
   items.innerHTML = "";
 
   let total = 0;
@@ -158,11 +160,16 @@ function showCartPopup() {
     `;
   });
 
-  document.getElementById(
-    "drawer-total"
-  ).innerText = total;
+  const totalEl =
+    document.getElementById(
+      "drawer-total"
+    );
 
-pushOverlayState();
+  if(totalEl){
+    totalEl.innerText = total;
+  }
+
+  pushOverlayState();
 
   drawer.classList.remove("hidden");
 }
@@ -170,10 +177,14 @@ pushOverlayState();
 /* CLOSE DRAWER */
 function closeDrawer() {
 
-  document
-    .getElementById("cart-drawer")
-    .classList
-    .add("hidden");
+  const drawer =
+    document.getElementById(
+      "cart-drawer"
+    );
+
+  if(drawer){
+    drawer.classList.add("hidden");
+  }
 }
 
 /* GO TO CART */
@@ -231,6 +242,11 @@ function decreaseQty(id) {
 /* LOAD PRODUCTS */
 async function loadProducts() {
 
+  const productsEl =
+    document.getElementById("products");
+
+  if(!productsEl) return;
+
   const { data, error } =
     await supabaseClient
       .from("products")
@@ -240,9 +256,6 @@ async function loadProducts() {
     console.log(error);
     return;
   }
-
-  const productsEl =
-    document.getElementById("products");
 
   productsEl.innerHTML = "";
 
@@ -330,11 +343,17 @@ async function openVariantModal(productId){
       .single();
 
   currentProduct = product;
-pushOverlayState();
-  document
-    .getElementById("variant-modal")
-    .classList
-    .remove("hidden");
+
+  const modal =
+    document.getElementById(
+      "variant-modal"
+    );
+
+  if(!modal) return;
+
+  pushOverlayState();
+
+  modal.classList.remove("hidden");
 
   document.getElementById(
     "variant-title"
@@ -399,16 +418,18 @@ pushOverlayState();
 /* CLOSE VARIANT MODAL */
 function closeVariantModal(){
 
-  document
-    .getElementById("variant-modal")
-    .classList
-    .add("hidden");
+  const modal =
+    document.getElementById(
+      "variant-modal"
+    );
+
+  if(modal){
+    modal.classList.add("hidden");
+  }
 }
 
 /* INITIAL LOAD */
 loadProducts();
-
-
 
 /* GLOBAL FUNCTIONS */
 window.addToCart = addToCart;
@@ -421,7 +442,6 @@ window.openVariantModal = openVariantModal;
 window.closeVariantModal = closeVariantModal;
 
 /* BACK BUTTON SUPPORT */
-
 function pushOverlayState(){
 
   history.pushState(
@@ -446,8 +466,6 @@ window.addEventListener(
         "cart-drawer"
       );
 
-    /* CLOSE VARIANT MODAL */
-
     if(
       variantModal &&
       !variantModal.classList.contains(
@@ -459,8 +477,6 @@ window.addEventListener(
 
       return;
     }
-
-    /* CLOSE CART DRAWER */
 
     if(
       cartDrawer &&
@@ -476,66 +492,35 @@ window.addEventListener(
   }
 );
 
+/* CATEGORY CAROUSEL */
 const categories = [
 
   {
-
-    name:
-      "Hair Care",
-
-    description:
-      "Nourish roots naturally",
-
-    image:
-      "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=1200&auto=format&fit=crop",
-
-    link:
-      "hair.html"
+    name:"Hair Care",
+    description:"Nourish roots naturally",
+    image:"https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=1200&auto=format&fit=crop",
+    link:"hair.html"
   },
 
   {
-
-    name:
-      "Skin Care",
-
-    description:
-      "Timeless herbal glow",
-
-    image:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop",
-
-    link:
-      "soap.html"
+    name:"Skin Care",
+    description:"Timeless herbal glow",
+    image:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop",
+    link:"soap.html"
   },
 
   {
-
-    name:
-      "Wellness",
-
-    description:
-      "Rituals for mindful living",
-
-    image:
-      "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1200&auto=format&fit=crop",
-
-    link:
-      "wellness.html"
+    name:"Wellness",
+    description:"Rituals for mindful living",
+    image:"https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1200&auto=format&fit=crop",
+    link:"wellness.html"
   },
 
   {
-
-    name:
-      "Herbal Oils",
-
-    description:
-      "Ancient nourishment rituals",
-
-    image:
-      "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?q=80&w=1200&auto=format&fit=crop",
-
-    link:
-      "oils.html"
+    name:"Herbal Oils",
+    description:"Ancient nourishment rituals",
+    image:"https://images.unsplash.com/photo-1505576399279-565b52d4ac71?q=80&w=1200&auto=format&fit=crop",
+    link:"oils.html"
   }
 
 ];
@@ -545,32 +530,36 @@ const categoryCarousel =
     "category-carousel"
   );
 
-categories.forEach(category => {
+if(categoryCarousel){
 
-  categoryCarousel.innerHTML += `
+  categories.forEach(category => {
 
-    <a
-      href="${category.link}"
-      class="category-card"
-    >
+    categoryCarousel.innerHTML += `
 
-      <img
-        src="${category.image}"
+      <a
+        href="${category.link}"
+        class="category-card"
       >
 
-      <div class="category-overlay">
+        <img
+          src="${category.image}"
+        >
 
-        <h3>
-          ${category.name}
-        </h3>
+        <div class="category-overlay">
 
-        <p>
-          ${category.description}
-        </p>
+          <h3>
+            ${category.name}
+          </h3>
 
-      </div>
+          <p>
+            ${category.description}
+          </p>
 
-    </a>
+        </div>
 
-  `;
-});
+      </a>
+
+    `;
+  });
+
+}

@@ -474,29 +474,15 @@ ${response.razorpay_payment_id}
 
 `;
 
-await fetch(
-
-  "https://api.telegram.org/bot8701949299:AAFQVSadaAa6ZOs4NJ3WOf0hzrzBFtDyRXc/sendMessage",
-
-  {
-
-    method:"POST",
-
-    headers:{
-      "Content-Type":
-        "application/json"
-    },
-
-    body:JSON.stringify({
-
-      chat_id:
-        "1033075051",
-
-      text:
-        telegramMessage
-    })
-  }
-);
+await fetch("/api/send-telegram", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    telegramMessage
+  })
+})
 
 
     /* CLEAR CART */
