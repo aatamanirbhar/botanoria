@@ -250,7 +250,7 @@ async function loadProducts() {
   const { data, error } =
     await supabaseClient
       .from("products")
-      .select("*");
+      .select("*").limit(8)
 
   if(error){
     console.log(error);
