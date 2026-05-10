@@ -574,16 +574,28 @@ const categories = [
   image:
   "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop",
 
-  link: "wellness.html"
+  link: "skin.html"
 },
 
+// {
+//   name: "Soap Rituals",
+//   description:
+//     "Fresh botanical cleansing with soft summer energy.",
+
+//   image:
+//   "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1200&auto=format&fit=crop",
+
+//   link: "soap.html"
+// }
+
 {
-  name: "Soap Rituals",
+  name: "Skin-Loving Soaps",
+
   description:
-    "Fresh botanical cleansing with soft summer energy.",
+    "Gentle botanical cleansing bars for soft, healthy glowing skin.",
 
   image:
-  "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1556228578-8c89e6adf883?q=80&w=1200&auto=format&fit=crop",
 
   link: "soap.html"
 },
@@ -594,9 +606,8 @@ const categories = [
     "Golden hour wellness rituals for mindful living.",
 
   image:
-  "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1200&auto=format&fit=crop",
-
-  link: "oil.html"
+"https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+  link: "wellness.html"
 }
 
 ];
