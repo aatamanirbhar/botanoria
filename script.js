@@ -520,35 +520,84 @@ window.addEventListener(
 );
 
 /* CATEGORY CAROUSEL */
+// const categories = [
+
+//   {
+//     name:"Hair Care",
+//     description:"Nourish roots naturally",
+//     image:"https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=1200&auto=format&fit=crop",
+//     link:"hair.html"
+//   },
+
+//   {
+//     name:"Skin Care",
+//     description:"Timeless herbal glow",
+//     image:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop",
+//     link:"soap.html"
+//   },
+
+//   {
+//     name:"Wellness",
+//     description:"Rituals for mindful living",
+//     image:"https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1200&auto=format&fit=crop",
+//     link:"wellness.html"
+//   },
+
+//   {
+//     name:"Herbal Oils",
+//     description:"Ancient nourishment rituals",
+//     image:"https://images.unsplash.com/photo-1505576399279-565b52d4ac71?q=80&w=1200&auto=format&fit=crop",
+//     link:"oils.html"
+//   }
+
+// ];
+
+
 const categories = [
 
-  {
-    name:"Hair Care",
-    description:"Nourish roots naturally",
-    image:"https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=1200&auto=format&fit=crop",
-    link:"hair.html"
-  },
+{
+  name: "Hair Care",
+  description:
+    "Cheerful herbal rituals for stronger, shinier hair.",
 
-  {
-    name:"Skin Care",
-    description:"Timeless herbal glow",
-    image:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop",
-    link:"soap.html"
-  },
+  image:
+  "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop",
 
-  {
-    name:"Wellness",
-    description:"Rituals for mindful living",
-    image:"https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1200&auto=format&fit=crop",
-    link:"wellness.html"
-  },
+  link: "hair.html"
+},
 
-  {
-    name:"Herbal Oils",
-    description:"Ancient nourishment rituals",
-    image:"https://images.unsplash.com/photo-1505576399279-565b52d4ac71?q=80&w=1200&auto=format&fit=crop",
-    link:"oils.html"
-  }
+{
+  name: "Skincare",
+  description:
+    "Sun-kissed skincare crafted for radiant glowing skin.",
+
+  image:
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop",
+
+  link: "wellness.html"
+},
+
+{
+  name: "Soap Rituals",
+  description:
+    "Fresh botanical cleansing with soft summer energy.",
+
+  image:
+  "https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1200&auto=format&fit=crop",
+
+  link: "soap.html"
+},
+
+{
+  name: "Wellness",
+  description:
+    "Golden hour wellness rituals for mindful living.",
+
+  image:
+  "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1200&auto=format&fit=crop",
+
+  link: "oil.html"
+}
 
 ];
 
