@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>
+    Admin Reviews | Botanoria
+  </title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+</head>
+
+<body>
+
+<section class="admin-review-page">
+
+  <h1>
+    Add Customer Review
+  </h1>
+
+  <input
+    type="text"
+    id="customer-name"
+    placeholder="Customer Name"
+    class="review-input"
+  >
+
+  <textarea
+    id="review-text"
+    placeholder="Customer Review"
+    class="review-input review-textarea"
+  ></textarea>
+
+  <select
+    id="review-rating"
+    class="review-input"
+  >
+
+    <option value="5">
+      5 Stars
+    </option>
+
+    <option value="4">
+      4 Stars
+    </option>
+
+    <option value="3">
+      3 Stars
+    </option>
+
+    <option value="2">
+      2 Stars
+    </option>
+
+    <option value="1">
+      1 Star
+    </option>
+
+  </select>
+
+  <label class="upload-label">
+    Upload Up To 3 Images
+  </label>
+
+  <input
+    type="file"
+    id="review-images"
+    multiple
+    accept="image/*"
+    class="review-input"
+  >
+
+  <label class="upload-label">
+    Upload One Video
+  </label>
+
+  <input
+    type="file"
+    id="review-video"
+    accept="video/*"
+    class="review-input"
+  >
+
+  <button
+    onclick="uploadReview()"
+    class="submit-review-btn"
+  >
+    Upload Review
+  </button>
+
+  <p id="review-status"></p>
+
+</section>
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+<script>
+
+async function uploadReview(){
+
+  const customerName =
+    document.getElementById(
+      "customer-name"
+    ).value;
+
+  const reviewText =
+    document.getElementById(
+      "review-text"
+    ).value;
+
+  const rating =
+    parseInt(
+      document.getElementById(
+        "review-rating"
+      ).value
+    );
+
+  const imageFiles =
+    document.getElementById(
+      "review-images"
+    ).files;
+
+  const videoFile =
+    document.getElementById(
+      "review-video"
+    ).files[0];
+
+  let imageUrls = [];
+
+  /* IMAGE UPLOAD */
+
+  for(let i = 0; i < imageFiles.length && i < 3; i++){
+
+    const file = imageFiles[i];
+
+    const fileName =
+      Date.now() + "-" + file.name;
+
+    const {
+      error
+    } = await supabaseClient
+      .storage
+      .from("review-images")
+      .upload(fileName, file);
+
+    if(error){
+
+      console.log(error);
+
+      continue;
+    }
+
+    const imageUrl =
+      supabaseClient
+      .storage
+      .from("review-images")
+      .getPublicUrl(fileName)
+      .data
+      .publicUrl;
+
+    imageUrls.push(imageUrl);
+  }
+
+  /* VIDEO UPLOAD */
+
+  let videoUrl = "";
+
+  if(videoFile){
+
+    const videoName =
+      Date.now() + "-" + videoFile.name;
+
+    const {
+      error
+    } = await supabaseClient
+      .storage
+      .from("review-videos")
+      .upload(videoName, videoFile);
+
+    if(!error){
+
+      videoUrl =
+        supabaseClient
+        .storage
+        .from("review-videos")
+        .getPublicUrl(videoName)
+        .data
+        .publicUrl;
+    }
+  }
+
+  /* INSERT DATABASE */
+
+  const {
+    error
+  } = await supabaseClient
+    .from("customer_reviews")
+    .insert([
+
+      {
+        customer_name:customerName,
+
+        review_text:reviewText,
+
+        rating:rating,
+
+        image1:imageUrls[0] || null,
+
+        image2:imageUrls[1] || null,
+
+        image3:imageUrls[2] || null,
+
+        video_url:videoUrl
+      }
+
+    ]);
+
+  if(error){
+
+    console.log(error);
+
+    document.getElementById(
+      "review-status"
+    ).innerText =
+    "Upload Failed";
+
+    return;
+  }
+
+  document.getElementById(
+    "review-status"
+  ).innerText =
+  "Review Uploaded Successfully";
+}
+
+</script>
+
+</body>
+</html>
