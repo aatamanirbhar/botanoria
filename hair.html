@@ -24,6 +24,27 @@
 </head>
 
 <body data-category="hair">
+  
+
+  <!-- INTRO REVEAL -->
+
+<div class="launch-intro" id="launchIntro">
+
+  <div class="intro-glow"></div>
+
+  <img
+    src="images/hair.png"
+    class="intro-product"
+  >
+
+  <h1 class="intro-text">
+
+    NEW<br>
+    LAUNCHED
+
+  </h1>
+
+</div>
 
   <!-- CART DRAWER -->
 
@@ -218,41 +239,17 @@
         class="showcase-bottle"
       >
 
-      <div class="ingredient-card ingredient-1">
+     <div class="center-benefit-card">
 
-        <h4>
-          Rosemary
-        </h4>
+  <h4 id="benefit-title">
+    Rosemary
+  </h4>
 
-        <p>
-          Stimulates healthy growth
-        </p>
+  <p id="benefit-text">
+    Stimulates healthy growth
+  </p>
 
-      </div>
-
-      <div class="ingredient-card ingredient-2">
-
-        <h4>
-          Onion Oil
-        </h4>
-
-        <p>
-          Helps reduce hair fall
-        </p>
-
-      </div>
-
-      <div class="ingredient-card ingredient-3">
-
-        <h4>
-          Hibiscus
-        </h4>
-
-        <p>
-          Restores natural shine
-        </p>
-
-      </div>
+</div>
 
     </div>
 
@@ -330,7 +327,66 @@
   </a>
 
 </footer>
+<script>
 
+const benefits = [
+
+  {
+    title:"Rosemary",
+    text:"Stimulates healthy growth"
+  },
+
+  {
+    title:"Onion Oil",
+    text:"Helps reduce hair fall"
+  },
+
+  {
+    title:"Hibiscus",
+    text:"Restores natural shine"
+  },
+
+  {
+    title:"tatti",
+    text:"Restores natural shine"
+
+  },
+
+   {
+    title:"potti",
+    text:"Restores natural shine"
+    
+  }
+
+];
+
+let currentBenefit = 0;
+
+setInterval(() => {
+
+  currentBenefit++;
+
+  if(currentBenefit >= benefits.length){
+
+    currentBenefit = 0;
+  }
+
+  document.getElementById(
+    "benefit-title"
+  ).innerText =
+  benefits[currentBenefit].title;
+
+  document.getElementById(
+    "benefit-text"
+  ).innerText =
+  benefits[currentBenefit].text;
+
+}, 1000);
+
+
+
+
+</script>
 </body>
 
 </html>

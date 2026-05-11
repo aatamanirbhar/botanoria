@@ -25,6 +25,26 @@
 
 <body data-category="wellness">
 
+  <!-- INTRO REVEAL -->
+
+<div class="launch-intro" id="launchIntro">
+
+  <div class="intro-glow"></div>
+
+  <img
+    src="images/sun.png"
+    class="intro-product"
+  >
+
+  <h1 class="intro-text">
+
+    NEW<br>
+    LAUNCHED
+
+  </h1>
+
+</div>
+
   <!-- CART DRAWER -->
   <div id="cart-drawer" class="drawer hidden">
 
@@ -185,6 +205,9 @@
 
   </div>
 
+
+
+  <!-- cardd
   <div class="hero-product-card">
 
     <img
@@ -207,7 +230,7 @@
 
     </div>
 
-  </div>
+  </div> -->
 
 </section>
 
@@ -248,42 +271,17 @@
       class="floating-product"
     >
 
-    <div class="benefit-card card-1">
+   <div class="sun-benefit-card">
 
-      <h4>
-        Rosemary
-      </h4>
+  <h4 id="sun-title">
+    SPF Protection
+  </h4>
 
-      <p>
-        Strengthens roots
-      </p>
+  <p id="sun-text">
+    Shields skin from harsh UV rays
+  </p>
 
-    </div>
-
-    <div class="benefit-card card-2">
-
-      <h4>
-        Onion Extract
-      </h4>
-
-      <p>
-        Reduces hair fall
-      </p>
-
-    </div>
-
-    <div class="benefit-card card-3">
-
-      <h4>
-        Hibiscus
-      </h4>
-
-      <p>
-        Restores shine
-      </p>
-
-    </div>
-
+</div>
   </div>
 
 </section>
@@ -339,7 +337,15 @@ function typeWriter(){
   }
 }
 
-window.onload = typeWriter;
+window.onload = () => {
+
+  setTimeout(() => {
+
+    typeWriter();
+
+  }, 2600);
+
+};
 
 </script>
 
@@ -395,6 +401,52 @@ window.onload = typeWriter;
   </a>
 
 </footer>
+
+<script>
+
+const sunBenefits = [
+
+  {
+    title:"SPF Protection",
+    text:"Shields skin from harsh UV rays"
+  },
+
+  {
+    title:"Vitamin Glow",
+    text:"Brightens and hydrates naturally"
+  },
+
+  {
+    title:"Ayurvedic Care",
+    text:"Herbal nourishment for healthy skin"
+  }
+
+];
+
+let currentSun = 0;
+
+setInterval(() => {
+
+  currentSun++;
+
+  if(currentSun >= sunBenefits.length){
+
+    currentSun = 0;
+  }
+
+  document.getElementById(
+    "sun-title"
+  ).innerText =
+  sunBenefits[currentSun].title;
+
+  document.getElementById(
+    "sun-text"
+  ).innerText =
+  sunBenefits[currentSun].text;
+
+}, 1000);
+
+</script>
 </body>
 
 </html>

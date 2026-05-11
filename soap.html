@@ -24,6 +24,25 @@
 </head>
 
 <body data-category="soap">
+  <!-- INTRO REVEAL -->
+
+<div class="launch-intro" id="launchIntro">
+
+  <div class="intro-glow"></div>
+
+  <img
+    src="images/soap.png"
+    class="intro-product"
+  >
+
+  <h1 class="intro-text">
+
+    NEW<br>
+    LAUNCHED
+
+  </h1>
+
+</div>
 
   <!-- CART DRAWER -->
 
@@ -124,87 +143,99 @@
 
   <!-- HERO -->
 
-  <section class="soap-editorial-hero">
+  <!-- HERO -->
 
-    <div class="soap-overlay"></div>
+<section class="cinematic-hero soap-hero">
 
-    <div class="soap-content">
+  <img
+    src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1400&q=80"
+    class="hero-bg"
+  >
 
-   
+  <div class="hero-darkness"></div>
 
-  
+  <div class="hero-editorial">
 
+    <h1 class="typewriter">
 
-    </div>
+      <span id="typed-text"></span>
 
-  </section>
+    </h1>
 
-  <!-- 3D SOAP SHOWCASE -->
+    <p>
 
-  <section class="soap-3d-section">
+      Skin-loving botanical cleansing rituals
+      crafted for soft radiant and naturally
+      glowing skin.
 
-    <div class="soap-intro">
+    </p>
 
-      <span>
-        NEW LAUNCHED ✦
-      </span>
+    <a href="#products-grid">
 
-      <h2>
-        Glow Ritual Soap
-      </h2>
-
-      <p>
-
-        A luxurious botanical cleansing
-        ritual crafted for radiant,
-        nourished glowing skin.
-
-      </p>
-
-      <button
-        onclick="heroShopNow('YOUR_PRODUCT_ID')"
-      >
-        Shop Ritual
+      <button>
+        Explore Collection
       </button>
 
+    </a>
+
+  </div>
+
+</section>
+
+<!-- NEW LAUNCHED -->
+
+<section class="product-showcase soap-showcase">
+
+  <div class="showcase-left">
+
+    <span>
+      NEW LAUNCHED ✦
+    </span>
+
+    <h2>
+      Glow Ritual Soap
+    </h2>
+
+    <p>
+
+      Luxurious herbal cleansing bars
+      enriched with saffron turmeric
+      and goat milk for radiant skin.
+
+    </p>
+
+    <button
+      onclick="heroShopNow('YOUR_PRODUCT_ID')"
+    >
+      Shop Ritual
+    </button>
+
+  </div>
+
+  <div class="showcase-center">
+
+    <div class="product-glow"></div>
+
+    <img
+      src="images/soap.png"
+      class="floating-product"
+    >
+
+    <div class="soap-benefit-card">
+
+      <h4 id="soap-title">
+        Saffron
+      </h4>
+
+      <p id="soap-text">
+        Brightens dull skin naturally
+      </p>
+
     </div>
 
-    <div class="soap-stage">
+  </div>
 
-      <div class="soap-aura"></div>
-
-      <img
-        src="images/soap.png"
-        class="rotating-soap"
-      >
-
-      <div class="orbit orbit-1">
-
-        <span>
-          Saffron ✦ Brightens
-        </span>
-
-      </div>
-
-      <div class="orbit orbit-2">
-
-        <span>
-          Goat Milk ✦ Hydrates
-        </span>
-
-      </div>
-
-      <div class="orbit orbit-3">
-
-        <span>
-          Turmeric ✦ Glows
-        </span>
-
-      </div>
-
-    </div>
-
-  </section>
+</section>
 
   <!-- PRODUCTS -->
 
@@ -278,6 +309,83 @@
   </a>
 
 </footer>
+
+<script>
+
+const soapBenefits = [
+
+  {
+    title:"Saffron",
+    text:"Brightens dull skin naturally"
+  },
+
+  {
+    title:"Goat Milk",
+    text:"Deeply hydrates and softens"
+  },
+
+  {
+    title:"Turmeric",
+    text:"Restores healthy natural glow"
+  }
+
+];
+
+let currentSoap = 0;
+
+setInterval(() => {
+
+  currentSoap++;
+
+  if(currentSoap >= soapBenefits.length){
+
+    currentSoap = 0;
+  }
+
+  document.getElementById(
+    "soap-title"
+  ).innerText =
+  soapBenefits[currentSoap].title;
+
+  document.getElementById(
+    "soap-text"
+  ).innerText =
+  soapBenefits[currentSoap].text;
+
+}, 3000);
+
+/* HERO TYPEWRITER */
+
+const text =
+`Soaps That Loves Your Skin`;
+
+let index = 0;
+
+function typeWriter(){
+
+  if(index < text.length){
+
+    document.getElementById(
+      "typed-text"
+    ).innerHTML += text.charAt(index);
+
+    index++;
+
+    setTimeout(typeWriter, 70);
+  }
+}
+
+window.onload = () => {
+
+  setTimeout(() => {
+
+    typeWriter();
+
+  }, 2600);
+
+};
+
+</script>
 </body>
 
 </html>

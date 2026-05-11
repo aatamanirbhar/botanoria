@@ -3030,14 +3030,18 @@ textarea.input {
   transform:translateY(80px);
 
   animation:hairReveal 1s forwards;
+
+  animation-delay:2.6s;
 }
 
+
+
 .hair-title span:nth-child(2){
-  animation-delay:0.2s;
+  animation-delay:2.8s;
 }
 
 .hair-title span:nth-child(3){
-  animation-delay:0.4s;
+  animation-delay:3s;
 }
 
 @keyframes hairReveal{
@@ -4240,6 +4244,8 @@ body[data-category="soap"] .showcase-left button{
   color:black;
 }
 
+
+
 /* OIL PAGE COLORS */
 
 body[data-category="oil"] .showcase-left h2{
@@ -4280,3 +4286,806 @@ body[data-category="oil"] .showcase-left button{
   );
 }
 
+
+/* CENTER BENEFIT CARD */
+
+.center-benefit-card{
+
+  position:absolute;
+
+  bottom:8%;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  width:230px;
+
+  padding:24px;
+
+  border-radius:28px;
+
+  background:
+linear-gradient(
+  135deg,
+  rgba(61,90,64,0.88),
+  rgba(107,143,113,0.82)
+);
+
+  backdrop-filter:blur(20px);
+
+  text-align:center;
+
+  z-index:30;
+
+  box-shadow:
+  0 20px 50px rgba(0,0,0,0.12);
+
+  animation:
+  floatingBenefit 4s ease-in-out infinite;
+}
+
+.center-benefit-card h4{
+
+  font-size:24px;
+color:white;
+  margin-bottom:10px;
+}
+
+.center-benefit-card p{
+
+  /* color:#666; */
+  color:rgba(255,255,255,0.86);
+
+  line-height:1.5;
+}
+
+@keyframes floatingBenefit{
+
+  0%{
+    transform:
+    translateX(-50%)
+    translateY(0px);
+  }
+
+  50%{
+    transform:
+    translateX(-50%)
+    translateY(-10px);
+  }
+
+  100%{
+    transform:
+    translateX(-50%)
+    translateY(0px);
+  }
+}
+
+
+/* SUNSCREEN FLOATING CARD */
+
+.sun-benefit-card{
+
+  position:absolute;
+
+  bottom:8%;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  width:240px;
+
+  padding:24px;
+
+  border-radius:30px;
+
+  background:
+  linear-gradient(
+    135deg,
+    rgba(255,190,90,0.88),
+    rgba(255,130,40,0.82)
+  );
+
+  backdrop-filter:blur(20px);
+
+  text-align:center;
+
+  z-index:30;
+
+  box-shadow:
+  0 20px 50px rgba(255,140,0,0.28);
+
+  animation:
+  sunFloat 4s ease-in-out infinite;
+
+  border:
+  1px solid rgba(255,255,255,0.22);
+}
+
+.sun-benefit-card h4{
+
+  font-size:24px;
+
+  margin-bottom:10px;
+
+  color:white;
+}
+
+.sun-benefit-card p{
+
+  color:rgba(255,255,255,0.9);
+
+  line-height:1.5;
+}
+
+@keyframes sunFloat{
+
+  0%{
+    transform:
+    translateX(-50%)
+    translateY(0px);
+  }
+
+  50%{
+    transform:
+    translateX(-50%)
+    translateY(-12px);
+  }
+
+  100%{
+    transform:
+    translateX(-50%)
+    translateY(0px);
+  }
+}
+
+/* SOAP FLOATING CARD */
+
+.soap-benefit-card{
+
+  position:absolute;
+
+  bottom:8%;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  width:240px;
+
+  padding:24px;
+
+  border-radius:30px;
+
+  background:
+  linear-gradient(
+    135deg,
+    rgba(240,210,170,0.92),
+    rgba(201,160,112,0.84)
+  );
+
+  backdrop-filter:blur(20px);
+
+  text-align:center;
+
+  z-index:20;
+
+  box-shadow:
+  0 20px 50px rgba(176,137,104,0.22);
+
+  animation:
+  soapFloat 4s ease-in-out infinite;
+}
+
+.soap-benefit-card h4{
+
+  font-size:24px;
+
+  margin-bottom:10px;
+
+  color:white;
+}
+
+.soap-benefit-card p{
+
+  color:
+  rgba(255,255,255,0.88);
+
+  line-height:1.5;
+}
+
+@keyframes soapFloat{
+
+  0%{
+    transform:
+    translateX(-50%)
+    translateY(0px);
+  }
+
+  50%{
+    transform:
+    translateX(-50%)
+    translateY(-10px);
+  }
+
+  100%{
+    transform:
+    translateX(-50%)
+    translateY(0px);
+  }
+}
+
+
+/* INTRO REVEAL */
+
+.launch-intro{
+
+  position:fixed;
+
+  inset:0;
+
+  background:
+  linear-gradient(
+    135deg,
+    #f7f1e8,
+    #efe5d6
+  );
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  flex-direction:column;
+
+  z-index:999999;
+
+  overflow:hidden;
+
+  animation:
+  introFade 0.8s ease forwards;
+
+  animation-delay:2.4s;
+}
+
+/* PRODUCT */
+
+.intro-product{
+
+  width:260px;
+
+  z-index:5;
+
+  animation:
+  introProduct 2.2s ease;
+}
+
+/* TEXT */
+
+.intro-text{
+
+  position:absolute;
+
+  font-size:clamp(70px,14vw,180px);
+
+  line-height:0.85;
+
+  text-align:center;
+
+  font-weight:900;
+
+  letter-spacing:-4px;
+
+  color:white;
+
+  mix-blend-mode:overlay;
+
+  z-index:3;
+
+  animation:
+  introText 2s ease;
+}
+
+/* GLOW */
+
+.intro-glow{
+
+  position:absolute;
+
+  width:500px;
+
+  height:500px;
+
+  border-radius:50%;
+
+  background:
+  radial-gradient(
+    rgba(255,180,80,0.35),
+    transparent 70%
+  );
+
+  animation:
+  pulseGlow 2s ease infinite;
+}
+
+/* PRODUCT ANIMATION */
+
+@keyframes introProduct{
+
+  0%{
+
+    opacity:0;
+
+    transform:
+    scale(0.4)
+    rotate(-18deg);
+  }
+
+  60%{
+
+    opacity:1;
+
+    transform:
+    scale(1.12)
+    rotate(4deg);
+  }
+
+  100%{
+
+    transform:
+    scale(1)
+    rotate(0deg);
+  }
+}
+
+/* TEXT ANIMATION */
+
+@keyframes introText{
+
+  0%{
+
+    opacity:0;
+
+    transform:
+    scale(0.6);
+  }
+
+  100%{
+
+    opacity:1;
+
+    transform:
+    scale(1);
+  }
+}
+
+/* GLOW */
+
+@keyframes pulseGlow{
+
+  0%{
+
+    transform:scale(0.8);
+  }
+
+  50%{
+
+    transform:scale(1.1);
+  }
+
+  100%{
+
+    transform:scale(0.8);
+  }
+}
+
+/* HIDE INTRO */
+
+@keyframes introFade{
+
+  to{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+  }
+}
+
+/* REMOVE ALL HORIZONTAL SCROLL */
+
+html,
+body{
+
+  overflow-x:hidden !important;
+
+  width:100%;
+
+  max-width:100%;
+}
+
+/* INTRO FIX */
+
+.launch-intro{
+
+  overflow:hidden;
+
+  width:100vw;
+
+  height:100vh;
+}
+
+/* PRODUCT FIX */
+
+.intro-product{
+
+  max-width:70vw;
+  /* width:min(220px,60vw); */
+
+  height:auto;
+}
+
+/* TEXT FIX */
+
+.intro-text{
+
+  width:100%;
+
+  padding:0 20px;
+
+  box-sizing:border-box;
+
+  word-break:break-word;
+}
+
+/* FINAL HARD OVERFLOW FIX */
+
+html,
+body{
+
+  margin:0 !important;
+  padding:0 !important;
+
+  width:100% !important;
+  max-width:100% !important;
+
+  overflow-x:hidden !important;
+}
+
+/* ALL SECTIONS */
+
+section,
+div{
+
+  max-width:100%;
+  box-sizing:border-box;
+}
+
+/* HERO */
+
+.cinematic-hero,
+.soap-hero,
+.product-showcase,
+.soap-showcase{
+
+  width:100% !important;
+
+  max-width:100% !important;
+
+  overflow:hidden !important;
+
+  position:relative;
+}
+
+/* HERO IMAGE */
+
+.hero-bg{
+
+  width:100% !important;
+
+  height:100% !important;
+
+  object-fit:cover;
+
+  left:0;
+  right:0;
+}
+
+/* INTRO */
+
+.launch-intro{
+
+  width:100vw;
+
+  height:100vh;
+
+  overflow:hidden !important;
+}
+
+/* PRODUCT PNG */
+
+.intro-product,
+.floating-product,
+.rotating-soap{
+
+  max-width:75vw !important;
+
+  height:auto;
+}
+
+/* TEXT */
+
+.intro-text,
+.hero-editorial h1,
+.showcase-left h2{
+
+  word-break:break-word;
+
+  overflow-wrap:break-word;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .hero-editorial{
+
+    width:90% !important;
+
+    left:5% !important;
+
+    right:5% !important;
+  }
+
+  .hero-editorial h1{
+
+    font-size:58px !important;
+
+    line-height:0.9;
+  }
+
+  .floating-product,
+  .rotating-soap{
+
+    width:280px !important;
+
+    max-width:80vw !important;
+  }
+
+  .intro-product{
+
+    width:220px !important;
+  }
+}
+
+/* BOTANORIA GLOBAL LOADER */
+
+.botanoria-loader{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:999999;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  flex-direction:column;
+
+  background:
+  linear-gradient(
+    135deg,
+    #f8f4ee,
+    #efe6d7
+  );
+
+  animation:
+  loaderFade 0.8s ease forwards;
+
+  animation-delay:2.2s;
+}
+
+/* GLOW */
+
+.loader-glow{
+
+  position:absolute;
+
+  width:340px;
+
+  height:340px;
+
+  border-radius:50%;
+
+  background:
+  radial-gradient(
+    rgba(214,190,150,0.35),
+    transparent 70%
+  );
+
+  animation:
+  pulseLoader 2s ease infinite;
+}
+
+/* LOGO */
+
+.loader-logo{
+
+  width:120px;
+
+  z-index:3;
+
+  animation:
+  logoReveal 1.4s ease;
+}
+
+/* TEXT */
+
+.loader-text{
+
+  margin-top:24px;
+
+  font-size:28px;
+
+  font-weight:500;
+
+  letter-spacing:1px;
+
+  color:#7a6755;
+
+  opacity:0;
+
+  animation:
+  textReveal 1s ease forwards;
+
+  animation-delay:0.8s;
+
+  z-index:3;
+}
+
+/* LOGO ANIMATION */
+
+@keyframes logoReveal{
+
+  0%{
+
+    opacity:0;
+
+    transform:
+    scale(0.6)
+    rotate(-10deg);
+  }
+
+  100%{
+
+    opacity:1;
+
+    transform:
+    scale(1)
+    rotate(0deg);
+  }
+}
+
+/* TEXT */
+
+@keyframes textReveal{
+
+  to{
+
+    opacity:1;
+
+    transform:
+    translateY(0px);
+  }
+}
+
+/* GLOW */
+
+@keyframes pulseLoader{
+
+  0%{
+
+    transform:scale(0.9);
+  }
+
+  50%{
+
+    transform:scale(1.1);
+  }
+
+  100%{
+
+    transform:scale(0.9);
+  }
+}
+
+/* FADE OUT */
+
+@keyframes loaderFade{
+
+  to{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+  }
+}
+
+/* HERO BUTTON DANCE */
+
+.hero-editorial button,
+.hair-main-btn,
+.soap-intro button,
+.showcase-left button{
+animation-delay:5s;
+  animation:
+  heroButtonDance 2.2s ease-in-out infinite;
+
+  transform-origin:center;
+}
+
+/* HOVER */
+
+.hero-editorial button:hover,
+.hair-main-btn:hover,
+.soap-intro button:hover,
+.showcase-left button:hover{
+
+  animation-play-state:paused;
+}
+
+/* ANIMATION */
+
+@keyframes heroButtonDance{
+
+  0%{
+
+    transform:
+    translateY(0px)
+    scale(1);
+  }
+
+  20%{
+
+    transform:
+    translateY(-4px)
+    scale(1.03);
+  }
+
+  40%{
+
+    transform:
+    translateY(0px)
+    scale(1);
+  }
+
+  60%{
+
+    transform:
+    rotate(-1deg)
+    scale(1.02);
+  }
+
+  80%{
+
+    transform:
+    rotate(1deg)
+    scale(1.02);
+  }
+
+  100%{
+
+    transform:
+    translateY(0px)
+    scale(1);
+  }
+}
