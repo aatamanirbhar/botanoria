@@ -250,7 +250,7 @@ async function loadProducts() {
   const { data, error } =
     await supabaseClient
       .from("products")
-      .select("*").limit(8)
+      .select("*").limit(50)
 
   if(error){
     console.log(error);
@@ -561,7 +561,8 @@ const categories = [
     "Cheerful herbal rituals for stronger, shinier hair.",
 
   image:
-  "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop",
+  "images/haircover.png",
+  // "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop",
 
   link: "hair.html"
 },
@@ -572,7 +573,7 @@ const categories = [
     "Sun-kissed skincare crafted for radiant glowing skin.",
 
   image:
-  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop",
+  "images/skincarecover.png",
 
   link: "skin.html"
 },
@@ -595,7 +596,7 @@ const categories = [
     "Gentle botanical cleansing bars for soft, healthy glowing skin.",
 
   image:
-  "https://images.unsplash.com/photo-1556228578-8c89e6adf883?q=80&w=1200&auto=format&fit=crop",
+  "images/soapcover.png",
 
   link: "soap.html"
 },
