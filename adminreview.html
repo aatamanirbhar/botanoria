@@ -100,6 +100,16 @@
 
 </section>
 
+<div class="admin-review-list">
+
+  <h2>
+    Manage Reviews
+  </h2>
+
+  <div id="reviews-list"></div>
+
+</div>
+
 <!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -243,6 +253,139 @@ async function uploadReview(){
     "review-status"
   ).innerText =
   "Review Uploaded Successfully";
+}
+
+
+async function loadAdminReviews(){
+
+  const { data, error } =
+  await supabaseClient
+  .from("customer_reviews")
+  .select("*")
+  .order("created_at", { ascending:false });
+
+  if(error){
+
+    console.log(error);
+    return;
+  }
+
+  const container =
+  document.getElementById("reviews-list");
+
+  container.innerHTML = "";
+
+  data.forEach(review => {
+
+    const card =
+    document.createElement("div");
+
+    card.className =
+    "review-admin-card";
+
+    let imagesHTML = "";
+
+    if(review.images){
+
+      review.images.forEach(img => {
+
+        imagesHTML += `
+          <img src="${img}">
+        `;
+      });
+    }
+
+    card.innerHTML = `
+
+      <h3>${review.customer_name}</h3>
+
+      <p>
+        ⭐ ${review.rating}/5
+      </p>
+
+      <p>
+        ${review.review_text}
+      </p>
+
+      <div class="review-admin-images">
+        ${imagesHTML}
+      </div>
+
+      ${
+        review.video
+        ?
+        `
+        <video
+          src="${review.video}"
+          controls
+          width="100%"
+          style="
+          border-radius:16px;
+          margin-top:12px;
+          ">
+        </video>
+        `
+        :
+        ""
+      }
+
+      <div class="review-admin-actions">
+
+        <button
+          class="edit-review-btn"
+          onclick="editReview('${review.id}')"
+        >
+          Edit
+        </button>
+
+        <button
+          class="delete-review-btn"
+          onclick="deleteReview('${review.id}')"
+        >
+          Delete
+        </button>
+
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+loadAdminReviews();
+
+async function deleteReview(id){
+
+  const confirmDelete =
+  confirm("Delete this review?");
+
+  if(!confirmDelete) return;
+
+  await supabaseClient
+  .from("customer_reviews")
+  .delete()
+  .eq("id", id);
+
+  loadAdminReviews();
+}
+
+async function editReview(id){
+
+  const newText =
+  prompt("Enter updated review");
+
+  if(!newText) return;
+
+  await supabaseClient
+  .from("customer_reviews")
+  .update({
+
+    review_text:newText
+
+  })
+  .eq("id", id);
+
+  loadAdminReviews();
 }
 
 </script>

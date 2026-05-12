@@ -601,12 +601,12 @@ const categories = [
 },
 
 {
-  name: "Wellness",
+  name: "Real Reviews",
   description:
-    "Golden hour wellness rituals for mindful living.",
+    "See what our customers say after switching to our products.",
 
   image:
-"https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+"images/reviews.jpeg",
   link: "custreviews.html"
 }
 
