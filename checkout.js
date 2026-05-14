@@ -89,7 +89,7 @@ cart.forEach(item => {
 function updateCheckoutTotal(){
 
   shipping =
-    subtotal >= 1000
+    subtotal >= 999
       ? 0
       : 49;
 
