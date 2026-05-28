@@ -474,15 +474,20 @@ ${response.razorpay_payment_id}
 
 `;
 
-await fetch("/api/send-telegram", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    telegramMessage
-  })
-})
+try {
+  await fetch("/api/send-telegram", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      telegramMessage
+    })
+  });
+} catch (telegramError) {
+  console.error("Telegram notification failed:", telegramError);
+  // Continue even if Telegram fails
+}
 
 
     /* CLEAR CART */
@@ -515,38 +520,44 @@ const couponText =
     ? `Coupon Applied: ${appliedCoupon}`
     : "";
 
-await emailjs.send(
+try {
+  await emailjs.send(
 
-  "service_494g4l7",
+    "service_494g4l7",
 
-  "template_yd4n0wk",
+    "template_yd4n0wk",
 
-{
+  {
 
-  customer_name:
-    customerName,
+    customer_name:
+      customerName,
 
-  customer_email:
-    customerEmail,
+    customer_email:
+      customerEmail,
 
-  total:
-    finalTotal,
+    total:
+      finalTotal,
 
-  order_items:
-    emailItems,
+    order_items:
+      emailItems,
 
-  coupon:
-    couponText,
+    coupon:
+      couponText,
 
-  discount:
-    discount || 0,
+    discount:
+      discount || 0,
 
-  shipping:
-    shipping === 0
-      ? "FREE"
-      : `₹${shipping}`
+    shipping:
+      shipping === 0
+        ? "FREE"
+        : `₹${shipping}`
+  }
+  );
+} catch (emailError) {
+  console.error("Email send failed:", emailError);
+  // Continue to success page even if email fails
 }
-);
+
     /* SUCCESS PAGE */
 
     window.location.href =
