@@ -88,10 +88,7 @@ cart.forEach(item => {
 
 function updateCheckoutTotal(){
 
-  shipping =
-    subtotal >= 999
-      ? 0
-      : 49;
+  shipping = 0;
 
   finalTotal =
     subtotal - discount + shipping;
@@ -268,7 +265,7 @@ async function startPayment(){
     const options = {
 
       key:
-        "rzp_live_SunfSXg6HjkMkj",
+        "rzp_test_SayxRYG9e6D0Gv",
 
       amount:
         order.amount,
@@ -312,12 +309,16 @@ async function startPayment(){
 
     const customerName =
       document
-        .querySelectorAll(".input")[0]
+        .getElementById(
+          "customer-name"
+        )
         .value;
 
     const customerPhone =
       document
-        .querySelectorAll(".input")[1]
+        .getElementById(
+          "customer-phone"
+        )
         .value;
 
     const customerEmail =
@@ -329,7 +330,9 @@ async function startPayment(){
 
     const customerAddress =
       document
-        .querySelectorAll(".input")[3]
+        .getElementById(
+          "customer-address"
+        )
         .value;
 
     /* SAVE ORDER */
@@ -474,15 +477,37 @@ ${response.razorpay_payment_id}
 
 `;
 
-await fetch("/api/send-telegram", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    telegramMessage
-  })
-})
+try{
+
+  const telegramResponse =
+    await fetch(
+      "/api/send-telegram",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          telegramMessage
+        })
+      }
+    );
+
+  if(!telegramResponse.ok){
+
+    console.warn(
+      "Telegram notification failed",
+      await telegramResponse.text()
+    );
+  }
+
+} catch(notificationError){
+
+  console.warn(
+    "Telegram notification failed",
+    notificationError
+  );
+}
 
 
     /* CLEAR CART */
@@ -515,6 +540,13 @@ const couponText =
     ? `Coupon Applied: ${appliedCoupon}`
     : "";
 
+try{
+
+  if(
+    window.emailjs &&
+    typeof emailjs.send === "function"
+  ){
+
 await emailjs.send(
 
   "service_494g4l7",
@@ -527,6 +559,12 @@ await emailjs.send(
     customerName,
 
   customer_email:
+    customerEmail,
+
+  to_email:
+    customerEmail,
+
+  reply_to:
     customerEmail,
 
   total:
@@ -547,6 +585,21 @@ await emailjs.send(
       : `₹${shipping}`
 }
 );
+
+  } else {
+
+    console.warn(
+      "EmailJS is not available"
+    );
+  }
+
+} catch(emailError){
+
+  console.warn(
+    "Customer confirmation email failed",
+    emailError
+  );
+}
     /* SUCCESS PAGE */
 
     window.location.href =
