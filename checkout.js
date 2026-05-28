@@ -268,7 +268,7 @@ async function startPayment(){
     const options = {
 
       key:
-        "rzp_test_SayxRYG9e6D0Gv",
+        "rzp_live_SunfSXg6HjkMkj",
 
       amount:
         order.amount,
