@@ -88,7 +88,7 @@ cart.forEach(item => {
 
 function updateCheckoutTotal(){
 
-  shipping = 0;
+  shipping = subtotal >= 599 ? 0 : 60;
 
   finalTotal =
     subtotal - discount + shipping;
