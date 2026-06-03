@@ -3,6 +3,16 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let selectedVariant = null;
 let currentProduct = null;
 
+function effectivePrice(product){
+  return (product.on_sale && product.sale_price) ? Number(product.sale_price) : Number(product.price);
+}
+
+function priceHTML(product){
+  return (product.on_sale && product.sale_price)
+    ? `<span class="old-price">₹${product.price}</span> ₹${product.sale_price}`
+    : `₹${product.price}`;
+}
+
 /* SAVE CART */
 function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
@@ -12,7 +22,7 @@ function saveCart() {
 function addToCart(product) {
 
   let existing = cart.find(item =>
-    String(item.id) === String(product.id)
+    String(item.id) === String(product.id) && !item.variantId
   );
 
   if (existing) {
@@ -21,9 +31,17 @@ function addToCart(product) {
 
   } else {
 
-    product.qty = 1;
+    const finalPrice = effectivePrice(product);
 
-    cart.push(product);
+    cart.push({
+      id: product.id,
+      name: product.name,
+      price: finalPrice,
+      original_price: product.price,
+      on_sale: !!(product.on_sale && product.sale_price),
+      image: product.image,
+      qty: 1
+    });
   }
 
   saveCart();
@@ -52,6 +70,8 @@ function addVariantToCart(){
 
   } else {
 
+    const finalPrice = effectivePrice(selectedVariant);
+
     cart.push({
 
       productId:
@@ -67,7 +87,13 @@ function addVariantToCart(){
         currentProduct.name,
 
       price:
+        finalPrice,
+
+      original_price:
         selectedVariant.price,
+
+      on_sale:
+        !!(selectedVariant.on_sale && selectedVariant.sale_price),
 
       image:
         selectedVariant.image ||
@@ -127,7 +153,9 @@ function showCartPopup() {
               : ""
           }
 
-          <p>₹${item.price}</p>
+          <p>
+            ${item.on_sale ? `<span class="old-price">₹${item.original_price}</span> ` : ""}₹${item.price}
+          </p>
 
           <div class="qty-row">
 
@@ -272,7 +300,7 @@ async function loadProducts() {
         <p>${product.description}</p>
 
         <p class="price">
-          ₹${product.price}
+          ${priceHTML(product)}
         </p>
 
         ${
@@ -367,8 +395,10 @@ async function openVariantModal(productId){
 
   document.getElementById(
     "variant-price"
-  ).innerText =
-    `₹${selectedVariant.price}`;
+  ).innerHTML =
+    selectedVariant.on_sale && selectedVariant.sale_price
+      ? `<span class="old-price">₹${selectedVariant.price}</span> ₹${selectedVariant.sale_price}`
+      : `₹${selectedVariant.price}`;
 
   const options =
     document.getElementById(
@@ -397,8 +427,10 @@ async function openVariantModal(productId){
 
       document.getElementById(
         "variant-price"
-      ).innerText =
-        `₹${variant.price}`;
+      ).innerHTML =
+        variant.on_sale && variant.sale_price
+          ? `<span class="old-price">₹${variant.price}</span> ₹${variant.sale_price}`
+          : `₹${variant.price}`;
 
       document
         .querySelectorAll(

@@ -1,3 +1,9 @@
+function priceHTML(product){
+  return (product.on_sale && product.sale_price)
+    ? `<span class="old-price">₹${product.price}</span> ₹${product.sale_price}`
+    : `₹${product.price}`;
+}
+
 const productsGrid =
   document.getElementById(
     "products-grid"
@@ -55,7 +61,7 @@ async function loadProducts(){
           </h3>
 
           <p class="premium-price">
-            ₹${product.price}
+            ${priceHTML(product)}
           </p>
 
           ${

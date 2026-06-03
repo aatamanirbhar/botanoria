@@ -123,6 +123,25 @@
 
     </select>
 
+    <label class="admin-checkbox">
+
+      <input
+        type="checkbox"
+        id="product-on-sale"
+        onchange="toggleSaleField('product')"
+      >
+
+      Product on sale (strike-through)
+
+    </label>
+
+    <input
+      id="product-sale-price"
+      class="input hidden"
+      placeholder="New Sale Price"
+      type="number"
+    >
+
     <input
       type="file"
       id="product-image-file"
@@ -213,9 +232,29 @@
       placeholder="Image URL"
     >
 
+    <label class="admin-checkbox">
+
+      <input
+        type="checkbox"
+        id="variant-on-sale"
+        onchange="toggleSaleField('variant')"
+      >
+
+      Variant on sale (strike-through)
+
+    </label>
+
+    <input
+      id="variant-sale-price"
+      class="input hidden"
+      placeholder="New Sale Price"
+      type="number"
+    >
+
     <button
       class="variant-add-btn"
-      onclick="addVariant()"
+      id="variant-save-btn"
+      onclick="saveVariant()"
     >
       Add Variant
     </button>

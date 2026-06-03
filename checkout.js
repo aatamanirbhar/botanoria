@@ -74,7 +74,7 @@ cart.forEach(item => {
         </p>
 
         <p class="checkout-item-price">
-          ₹${itemTotal}
+          ${item.on_sale ? `<span class="old-price">₹${item.original_price * item.qty}</span> ` : ""}₹${itemTotal}
         </p>
 
       </div>
@@ -393,7 +393,10 @@ async function startPayment(){
           item.qty,
 
         price:
-          item.price
+          item.price,
+
+        original_price:
+          item.original_price || item.price
 
       }));
 
@@ -419,9 +422,7 @@ const itemsText =
   Quantity:
   ${item.qty}
 
-  Price:
-  ₹${item.price}
-
+  ${item.on_sale ? `  ~~₹${item.original_price}~~ → ₹${item.price}\n` : `  Price: ₹${item.price}\n`}
   Item Total:
   ₹${item.price * item.qty}
 
@@ -507,8 +508,7 @@ ${item.variantName
 
 Qty: ${item.qty}
 
-Price:
-₹${item.price * item.qty}
+${item.on_sale ? `~~₹${item.original_price}~~ → ₹${item.price}\n` : `Price: ₹${item.price * item.qty}\n`}
 
 `).join("");
 

@@ -1,3 +1,21 @@
+function toggleSaleField(type){
+  const checkbox = document.getElementById(`${type}-on-sale`);
+  const field    = document.getElementById(`${type}-sale-price`);
+  if(checkbox.checked){
+    field.classList.remove("hidden");
+  } else {
+    field.classList.add("hidden");
+    field.value = "";
+  }
+}
+
+function priceDisplay(product){
+  if(product.on_sale && product.sale_price){
+    return `<span class="old-price">₹${product.price}</span> ₹${product.sale_price}`;
+  }
+  return `₹${product.price}`;
+}
+
 async function loadAdminProducts(){
 
   const { data, error } =
@@ -42,7 +60,7 @@ async function loadAdminProducts(){
           </p>
 
           <h4>
-            ₹${product.price}
+            ${priceDisplay(product)}
           </h4>
 
           <p class="admin-category">
@@ -140,6 +158,16 @@ async function addProduct(){
       "product-has-variants"
     ).checked;
 
+  const on_sale =
+    document.getElementById(
+      "product-on-sale"
+    ).checked;
+
+  const sale_price =
+    document.getElementById(
+      "product-sale-price"
+    ).value || null;
+
   if(editingProductId){
 
     const { error } =
@@ -152,7 +180,9 @@ async function addProduct(){
           price,
           image,
           category,
-          has_variants
+          has_variants,
+          on_sale,
+          sale_price
 
         })
         .eq(
@@ -179,7 +209,9 @@ async function addProduct(){
           price,
           image,
           category,
-          has_variants
+          has_variants,
+          on_sale,
+          sale_price
 
         }]);
 
@@ -252,6 +284,18 @@ async function editProduct(id){
   ).checked =
     data.has_variants;
 
+  document.getElementById(
+    "product-on-sale"
+  ).checked =
+    data.on_sale || false;
+
+  document.getElementById(
+    "product-sale-price"
+  ).value =
+    data.sale_price || "";
+
+  toggleSaleField("product");
+
   openAddProductModal();
 }
 
@@ -292,6 +336,18 @@ function clearProductForm(){
   document.getElementById(
     "product-has-variants"
   ).checked = false;
+
+  document.getElementById(
+    "product-on-sale"
+  ).checked = false;
+
+  document.getElementById(
+    "product-sale-price"
+  ).value = "";
+
+  document.getElementById(
+    "product-sale-price"
+  ).classList.add("hidden");
 }
 
 async function uploadProductImage(){
@@ -351,8 +407,8 @@ document
   );
 
 let editingProductId = null;
-
 let currentVariantProductId = null;
+let editingVariantId = null;
 
 async function deleteProduct(id){
 
@@ -456,7 +512,9 @@ async function loadVariants(productId){
 
           <p>
 
-            ₹${variant.price}
+            ${variant.on_sale && variant.sale_price
+              ? `<span class="old-price">₹${variant.price}</span> ₹${variant.sale_price}`
+              : `₹${variant.price}`}
 
             •
 
@@ -467,12 +525,23 @@ async function loadVariants(productId){
 
         </div>
 
-        <button
-          class="admin-delete-btn"
-          onclick="deleteVariant('${variant.id}')"
-        >
-          Delete
-        </button>
+        <div class="admin-variant-actions">
+
+          <button
+            class="admin-edit-btn"
+            onclick="editVariant('${variant.id}')"
+          >
+            Edit
+          </button>
+
+          <button
+            class="admin-delete-btn"
+            onclick="deleteVariant('${variant.id}')"
+          >
+            Delete
+          </button>
+
+        </div>
 
       </div>
 
@@ -480,7 +549,7 @@ async function loadVariants(productId){
   });
 }
 
-async function addVariant(){
+async function saveVariant(){
 
   const name =
     document.getElementById(
@@ -502,33 +571,123 @@ async function addVariant(){
       "variant-image"
     ).value;
 
-  const { error } =
-    await supabaseClient
-      .from("product_variants")
-      .insert([{
+  const on_sale =
+    document.getElementById(
+      "variant-on-sale"
+    ).checked;
 
-        product_id:
-          currentVariantProductId,
+  const sale_price =
+    document.getElementById(
+      "variant-sale-price"
+    ).value || null;
 
-        name,
-        price,
-        stock,
-        image
+  if(editingVariantId){
 
-      }]);
+    const { error } =
+      await supabaseClient
+        .from("product_variants")
+        .update({
+          name,
+          price,
+          stock,
+          image,
+          on_sale,
+          sale_price
+        })
+        .eq("id", editingVariantId);
 
-  if(error){
+    if(error){
+      console.log(error);
+      return;
+    }
 
-    console.log(error);
+  } else {
 
-    return;
+    const { error } =
+      await supabaseClient
+        .from("product_variants")
+        .insert([{
+          product_id:
+            currentVariantProductId,
+          name,
+          price,
+          stock,
+          image,
+          on_sale,
+          sale_price
+        }]);
+
+    if(error){
+      console.log(error);
+      return;
+    }
   }
+
+  editingVariantId = null;
+
+  document.getElementById(
+    "variant-save-btn"
+  ).innerText = "Add Variant";
 
   clearVariantForm();
 
   loadVariants(
     currentVariantProductId
   );
+}
+
+async function editVariant(id){
+
+  const { data, error } =
+    await supabaseClient
+      .from("product_variants")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+  if(error){
+    console.log(error);
+    return;
+  }
+
+  editingVariantId = id;
+
+  document.getElementById(
+    "variant-name"
+  ).value = data.name;
+
+  document.getElementById(
+    "variant-price"
+  ).value = data.price;
+
+  document.getElementById(
+    "variant-stock"
+  ).value = data.stock;
+
+  document.getElementById(
+    "variant-image"
+  ).value = data.image || "";
+
+  document.getElementById(
+    "variant-on-sale"
+  ).checked = data.on_sale || false;
+
+  document.getElementById(
+    "variant-sale-price"
+  ).value = data.sale_price || "";
+
+  toggleSaleField("variant");
+
+  document.getElementById(
+    "variant-save-btn"
+  ).innerText = "Update Variant";
+
+  document
+    .getElementById(
+      "variant-manager-modal"
+    )
+    .classList
+    .remove("hidden");
 }
 
 async function deleteVariant(id){
@@ -575,6 +734,24 @@ function clearVariantForm(){
   document.getElementById(
     "variant-image"
   ).value = "";
+
+  document.getElementById(
+    "variant-on-sale"
+  ).checked = false;
+
+  document.getElementById(
+    "variant-sale-price"
+  ).value = "";
+
+  document.getElementById(
+    "variant-sale-price"
+  ).classList.add("hidden");
+
+  document.getElementById(
+    "variant-save-btn"
+  ).innerText = "Add Variant";
+
+  editingVariantId = null;
 }
 
 function closeVariantManager(){
@@ -592,6 +769,8 @@ function closeVariantManager(){
 loadAdminProducts();
 
 /* GLOBAL */
+
+window.toggleSaleField = toggleSaleField;
 
 window.openAddProductModal =
   openAddProductModal;
@@ -614,8 +793,11 @@ window.openVariantManager =
 window.closeVariantManager =
   closeVariantManager;
 
-window.addVariant =
-  addVariant;
+window.saveVariant =
+  saveVariant;
+
+window.editVariant =
+  editVariant;
 
 window.deleteVariant =
   deleteVariant;
