@@ -11,7 +11,8 @@ function toggleSaleField(type){
 
 function priceDisplay(product){
   if(product.on_sale && product.sale_price){
-    return `<span class="old-price">₹${product.price}</span> ₹${product.sale_price}`;
+    const discount = Math.round((1 - product.sale_price / product.price) * 100);
+    return `<span class="old-price">₹${product.price}</span> ₹${product.sale_price} <span class="discount-tag">${discount}% OFF</span>`;
   }
   return `₹${product.price}`;
 }
@@ -513,7 +514,7 @@ async function loadVariants(productId){
           <p>
 
             ${variant.on_sale && variant.sale_price
-              ? `<span class="old-price">₹${variant.price}</span> ₹${variant.sale_price}`
+              ? `<span class="old-price">₹${variant.price}</span> ₹${variant.sale_price} <span class="discount-tag">${Math.round((1 - variant.sale_price / variant.price) * 100)}% OFF</span>`
               : `₹${variant.price}`}
 
             •

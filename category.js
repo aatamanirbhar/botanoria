@@ -1,7 +1,9 @@
 function priceHTML(product){
-  return (product.on_sale && product.sale_price)
-    ? `<span class="old-price">₹${product.price}</span> ₹${product.sale_price}`
-    : `₹${product.price}`;
+  if(product.on_sale && product.sale_price){
+    const discount = Math.round((1 - product.sale_price / product.price) * 100);
+    return `<span class="old-price">₹${product.price}</span> ₹${product.sale_price} <span class="discount-tag">${discount}% OFF</span>`;
+  }
+  return `₹${product.price}`;
 }
 
 const productsGrid =

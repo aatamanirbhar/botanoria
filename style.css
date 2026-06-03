@@ -121,6 +121,19 @@ body {
   margin-right: 6px;
 }
 
+.discount-tag {
+  display: inline-block;
+  background: #e63946;
+  color: white;
+  font-size: 0.55em;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+  letter-spacing: 0.5px;
+}
+
 .btn {
   width: 100%;
   margin-top: auto;

@@ -74,7 +74,7 @@ cart.forEach(item => {
         </p>
 
         <p class="checkout-item-price">
-          ${item.on_sale ? `<span class="old-price">₹${item.original_price * item.qty}</span> ` : ""}₹${itemTotal}
+          ${item.on_sale ? `<span class="old-price">₹${item.original_price * item.qty}</span> ₹${itemTotal} <span class="discount-tag">${Math.round((1 - item.price / item.original_price) * 100)}% OFF</span>` : `₹${itemTotal}`}
         </p>
 
       </div>

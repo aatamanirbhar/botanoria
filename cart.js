@@ -25,7 +25,7 @@ function renderCart() {
           ${item.variantName ? `<p>${item.variantName}</p>` : ""}
 
           <p>
-            ${item.on_sale ? `<span class="old-price">₹${item.original_price}</span> ` : ""}₹${item.price}
+            ${item.on_sale ? `<span class="old-price">₹${item.original_price}</span> ₹${item.price} <span class="discount-tag">${Math.round((1 - item.price / item.original_price) * 100)}% OFF</span>` : `₹${item.price}`}
           </p>
 
           <div class="qty-row">

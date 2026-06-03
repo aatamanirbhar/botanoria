@@ -8,9 +8,11 @@ function effectivePrice(product){
 }
 
 function priceHTML(product){
-  return (product.on_sale && product.sale_price)
-    ? `<span class="old-price">₹${product.price}</span> ₹${product.sale_price}`
-    : `₹${product.price}`;
+  if(product.on_sale && product.sale_price){
+    const discount = Math.round((1 - product.sale_price / product.price) * 100);
+    return `<span class="old-price">₹${product.price}</span> ₹${product.sale_price} <span class="discount-tag">${discount}% OFF</span>`;
+  }
+  return `₹${product.price}`;
 }
 
 /* SAVE CART */
@@ -154,7 +156,7 @@ function showCartPopup() {
           }
 
           <p>
-            ${item.on_sale ? `<span class="old-price">₹${item.original_price}</span> ` : ""}₹${item.price}
+            ${item.on_sale ? `<span class="old-price">₹${item.original_price}</span> ₹${item.price} <span class="discount-tag">${Math.round((1 - item.price / item.original_price) * 100)}% OFF</span>` : `₹${item.price}`}
           </p>
 
           <div class="qty-row">
@@ -397,7 +399,7 @@ async function openVariantModal(productId){
     "variant-price"
   ).innerHTML =
     selectedVariant.on_sale && selectedVariant.sale_price
-      ? `<span class="old-price">₹${selectedVariant.price}</span> ₹${selectedVariant.sale_price}`
+      ? `<span class="old-price">₹${selectedVariant.price}</span> ₹${selectedVariant.sale_price} <span class="discount-tag">${Math.round((1 - selectedVariant.sale_price / selectedVariant.price) * 100)}% OFF</span>`
       : `₹${selectedVariant.price}`;
 
   const options =
@@ -429,7 +431,7 @@ async function openVariantModal(productId){
         "variant-price"
       ).innerHTML =
         variant.on_sale && variant.sale_price
-          ? `<span class="old-price">₹${variant.price}</span> ₹${variant.sale_price}`
+          ? `<span class="old-price">₹${variant.price}</span> ₹${variant.sale_price} <span class="discount-tag">${Math.round((1 - variant.sale_price / variant.price) * 100)}% OFF</span>`
           : `₹${variant.price}`;
 
       document
